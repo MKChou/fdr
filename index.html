@@ -1,1 +1,67 @@
 
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>我的專題網站</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>我的專題名稱</h1>
+    <nav>
+      <ul>
+        <li><a href="#about">關於專題</a></li>
+        <li><a href="#features">特色介紹</a></li>
+        <li><a href="#gallery">成果展示</a></li>
+        <li><a href="#contact">聯絡我</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section id="about">
+      <h2>關於專題</h2>
+      <p>這裡介紹你的專題背景、動機與目標。</p>
+    </section>
+
+    <section id="features">
+      <h2>特色介紹</h2>
+      <ul>
+        <li>特色一說明</li>
+        <li>特色二說明</li>
+        <li>特色三說明</li>
+      </ul>
+    </section>
+
+    <section id="gallery">
+      <h2>成果展示</h2>
+      <div class="gallery">
+        <img src="img/demo1.jpg" alt="成果1">
+        <img src="img/demo2.jpg" alt="成果2">
+      </div>
+    </section>
+
+    <section id="contact">
+      <h2>聯絡我</h2>
+      <form id="contactForm">
+        <label for="name">姓名：</label>
+        <input type="text" id="name" name="name" required>
+        <label for="email">Email：</label>
+        <input type="email" id="email" name="email" required>
+        <label for="message">訊息：</label>
+        <textarea id="message" name="message" required></textarea>
+        <button type="submit">送出</button>
+      </form>
+      <p id="formMsg"></p>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 我的專題網站</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
