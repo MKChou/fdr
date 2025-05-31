@@ -1,24 +1,84 @@
 body {
   font-family: "Microsoft JhengHei", Arial, sans-serif;
-  background-color: #f9f9f9;
-  text-align: center;
-  margin-top: 50px;
+  margin: 0;
+  padding: 0;
+  background: #f9f9f9;
+  color: #222;
 }
 
-h1 {
-  color: #007acc;
+header {
+  background: #4a90e2;
+  color: white;
+  padding: 1.5em 0;
+  text-align: center;
+}
+
+nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 1em 0 0 0;
+  display: flex;
+  justify-content: center;
+  gap: 2em;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+main {
+  max-width: 900px;
+  margin: 2em auto;
+  background: white;
+  padding: 2em;
+  border-radius: 10px;
+  box-shadow: 0 0 10px #ccc;
+}
+
+section {
+  margin-bottom: 2.5em;
+}
+
+.gallery {
+  display: flex;
+  gap: 1em;
+  flex-wrap: wrap;
+}
+.gallery img {
+  width: 200px;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px #aaa;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  max-width: 400px;
+}
+
+input, textarea {
+  padding: 0.5em;
+  border: 1px solid #bbb;
+  border-radius: 4px;
 }
 
 button {
-  padding: 10px 20px;
-  font-size: 16px;
-  cursor: pointer;
-  background: #007acc;
-  color: #fff;
+  background: #4a90e2;
+  color: white;
   border: none;
-  border-radius: 5px;
+  padding: 0.7em;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1em;
 }
 
-button:hover {
-  background: #005f99;
+footer {
+  text-align: center;
+  padding: 1em 0;
+  background: #222;
+  color: #fff;
+  margin-top: 2em;
 }
