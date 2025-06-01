@@ -6,66 +6,140 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <div class="language-switch">
+    <button onclick="switchLanguage('zh')" class="active">中文</button>
+    <button onclick="switchLanguage('en')">English</button>
+  </div>
+
   <div class="poster">
     <header>
-      <h1>基於 NVIDIA Jetson Nano 2GB 的多模態邊緣運算跌倒偵測系統</h1>
-      <h2 class="en-title">Real-Time Multimodal Fall Detection via Edge-Optimized Decision-Level Fusion</h2>
+      <h1 class="zh">基於 NVIDIA Jetson Nano 2GB 的多模態邊緣運算跌倒偵測系統</h1>
+      <h1 class="en">Real-Time Multimodal Fall Detection via Edge-Optimized Decision-Level Fusion</h1>
       <div class="authors">
-        <p>作者：XXX　　指導教授：XXX　　單位：XXX大學</p>
+        <p class="zh">單位：國立成功大學　　學生: 周明坤　　指導教授：李孟學　　</p>
+        <p class="en">Department: National Cheng Kung University    Student: Ming-Kun Chou    Advisor: Meng-Hsueh Lee</p>
       </div>
     </header>
 
     <main class="poster-content">
       <section class="abstract">
-        <h2>摘要</h2>
-        <p>跌倒是老年人常見的安全風險，可能導致嚴重的健康問題。本研究計畫旨在利用 NVIDIA Jetson Nano 2GB 開發板，結合多模態感測技術和邊緣運算，建立一個高效、準確且保護隱私的跌倒偵測系統。計畫將優化 MoveNet 的 ONNX 模型在資源受限的邊緣設備上運行，並融合多種感測器數據以提高偵測準確率。</p>
+        <h2 class="zh">摘要</h2>
+        <h2 class="en">Abstract</h2>
+        <p class="zh">跌倒是老年人常見的安全風險，可能導致嚴重的健康問題。本研究計畫旨在利用 NVIDIA Jetson Nano 2GB 開發板，結合多模態感測技術和邊緣運算，建立一個高效、準確且保護隱私的跌倒偵測系統。計畫將優化 MoveNet 的 ONNX 模型在資源受限的邊緣設備上運行，並融合多種感測器數據以提高偵測準確率。</p>
+        <p class="en">Falls are a common safety risk for elderly people, potentially leading to serious health issues. This research project aims to develop an efficient, accurate, and privacy-preserving fall detection system using the NVIDIA Jetson Nano 2GB development board, combining multimodal sensing technology and edge computing. The project will optimize the MoveNet ONNX model for operation on resource-constrained edge devices and fuse multiple sensor data to improve detection accuracy.</p>
       </section>
 
       <div class="poster-grid">
         <section class="poster-section">
-          <h2>研究背景與動機</h2>
+          <h2 class="zh">研究背景與動機</h2>
+          <h2 class="en">Research Background and Motivation</h2>
           <div class="content">
-            <h3>跌倒風險與社會需求</h3>
-            <p>跌倒事件是老年人最常見的安全隱憂，根據研究數據，未來將有約 5.8 億老年人每年至少跌倒一次，尤其好發於浴室、客廳和臥室等場所。</p>
+            <h3 class="zh">跌倒風險與社會需求</h3>
+            <h3 class="en">Fall Risk and Social Needs</h3>
+            <p class="zh">跌倒事件是老年人最常見的安全隱憂，根據研究數據，未來將有約 5.8 億老年人每年至少跌倒一次，尤其好發於浴室、客廳和臥室等場所[4]。跌倒事件一旦發生，輕則骨折、癱瘓，重則導致死亡，因此及時偵測和救援具有重要意義。</p>
+            <p class="en">Falls are the most common safety concern for elderly people. According to research data, approximately 580 million elderly people will experience at least one fall annually, particularly in bathrooms, living rooms, and bedrooms[4]. Falls can result in fractures, paralysis, or even death, making timely detection and rescue crucial.</p>
             
-            <h3>現有方法的局限性</h3>
-            <p>目前的跌倒偵測系統主要分為三類：穿戴式裝置、環境感測器和視覺基礎系統。這些方法各有其局限性，需要改進。</p>
+            <h3 class="zh">現有方法的局限性</h3>
+            <h3 class="en">Limitations of Existing Methods</h3>
+            <p class="zh">目前的跌倒偵測系統主要分為三類：穿戴式裝置、環境感測器和視覺基礎系統。穿戴式裝置雖然便於攜帶，但常因舒適度問題導致使用率低；環境感測器（如壓力墊）安裝範圍有限；而傳統視覺系統雖然覆蓋範圍廣，但可能侵犯隱私且在光線不足時效果欠佳[15]。</p>
+            <p class="en">Current fall detection systems are mainly divided into three categories: wearable devices, environmental sensors, and vision-based systems. While wearable devices are portable, they often have low usage rates due to comfort issues; environmental sensors (such as pressure pads) have limited installation scope; and traditional vision systems, although covering a wide range, may violate privacy and perform poorly in low-light conditions[15].</p>
+
+            <h3 class="zh">多模態融合與邊緣運算優勢</h3>
+            <h3 class="en">Advantages of Multimodal Fusion and Edge Computing</h3>
+            <p class="zh">多模態數據融合能夠結合不同類型感測器的優勢，提高系統整體性能和可靠性[5][15]。例如，結合視覺和音頻可以顯著提高偵測的靈敏度（從單一視覺模態的 81.67% 提升至融合後的 96.67%）[15]。</p>
+            <p class="en">Multimodal data fusion can combine the advantages of different types of sensors to improve overall system performance and reliability[5][15]. For example, combining visual and audio can significantly increase detection sensitivity (from 81.67% for single visual modality to 96.67% after fusion)[15].</p>
           </div>
         </section>
 
         <section class="poster-section">
-          <h2>研究目標</h2>
+          <h2 class="zh">研究目標</h2>
+          <h2 class="en">Research Objectives</h2>
           <div class="content">
+            <h3 class="zh">主要目標</h3>
+            <h3 class="en">Main Objective</h3>
+            <p class="zh">本研究旨在開發一個基於 NVIDIA Jetson Nano 2GB 的多模態跌倒偵測系統，該系統能夠在邊緣設備上實時處理和分析多種感測器數據，實現高準確率、低延遲的跌倒偵測。</p>
+            <p class="en">This research aims to develop a multimodal fall detection system based on NVIDIA Jetson Nano 2GB that can process and analyze multiple sensor data in real-time on edge devices, achieving high-accuracy, low-latency fall detection.</p>
+
+            <h3 class="zh">具體目標</h3>
+            <h3 class="en">Specific Objectives</h3>
             <ul>
-              <li>設計並實現基於 Jetson Nano 2GB 的多模態數據採集和處理框架</li>
-              <li>優化 MoveNet ONNX 模型，使其能夠在 Jetson Nano 2GB 的資源限制下高效運行</li>
-              <li>開發多模態融合算法，結合視覺骨架數據與其他感測數據</li>
-              <li>建立完整的評估方法，包括準確率、靈敏度等指標</li>
+              <li class="zh">設計並實現基於 Jetson Nano 2GB 的多模態數據採集和處理框架</li>
+              <li class="en">Design and implement a multimodal data acquisition and processing framework based on Jetson Nano 2GB</li>
+              <li class="zh">優化 MoveNet ONNX 模型，使其能夠在 Jetson Nano 2GB 的資源限制下高效運行</li>
+              <li class="en">Optimize the MoveNet ONNX model for efficient operation under Jetson Nano 2GB's resource constraints</li>
+              <li class="zh">開發多模態融合算法，結合視覺骨架數據與其他感測數據</li>
+              <li class="en">Develop multimodal fusion algorithms combining visual skeleton data with other sensor data</li>
+              <li class="zh">建立完整的評估方法，包括準確率、靈敏度等指標</li>
+              <li class="en">Establish comprehensive evaluation methods including accuracy and sensitivity metrics</li>
+              <li class="zh">驗證系統在真實環境中的性能和適用性</li>
+              <li class="en">Validate system performance and applicability in real-world environments</li>
             </ul>
           </div>
         </section>
 
         <section class="poster-section">
-          <h2>系統架構</h2>
+          <h2 class="zh">系統架構</h2>
+          <h2 class="en">System Architecture</h2>
           <div class="content">
-            <h3>硬體架構</h3>
-            <p>NVIDIA Jetson Nano 2GB 開發板</p>
-            <p>多模態感測器（相機、麥克風、毫米波雷達）</p>
+            <h3 class="zh">硬體架構</h3>
+            <h3 class="en">Hardware Architecture</h3>
+            <p class="zh">系統核心使用 NVIDIA Jetson Nano 2GB 開發套件，該設備搭載四核 ARM A57 處理器和 128 核 Maxwell GPU[1][11]。具有 1 個 MIPI CSI-2 相機接口、1 個 USB 3.0 端口、2 個 USB 2.0 端口等接口。</p>
+            <p class="en">The system core uses the NVIDIA Jetson Nano 2GB development kit, equipped with a quad-core ARM A57 processor and 128-core Maxwell GPU[1][11]. It features 1 MIPI CSI-2 camera interface, 1 USB 3.0 port, 2 USB 2.0 ports, and other interfaces.</p>
             
-            <h3>軟體架構</h3>
-            <p>多線程數據處理流水線</p>
-            <p>優化的 MoveNet ONNX 模型</p>
+            <h3 class="zh">多模態感測器</h3>
+            <h3 class="en">Multimodal Sensors</h3>
+            <ul>
+              <li class="zh">視覺感測：MIPI CSI-2 相機或 USB 網絡攝像頭</li>
+              <li class="en">Visual Sensing: MIPI CSI-2 camera or USB webcam</li>
+              <li class="zh">音頻感測：USB 麥克風陣列</li>
+              <li class="en">Audio Sensing: USB microphone array</li>
+              <li class="zh">毫米波雷達：60GHz 毫米波雷達模組（可選）</li>
+              <li class="en">Millimeter Wave Radar: 60GHz radar module (optional)</li>
+            </ul>
+
+            <h3 class="zh">軟體架構</h3>
+            <h3 class="en">Software Architecture</h3>
+            <p class="zh">多線程數據處理流水線，包括：</p>
+            <p class="en">Multithreaded data processing pipeline, including:</p>
+            <ul>
+              <li class="zh">視覺數據流：影像捕獲 → 預處理 → 骨架提取</li>
+              <li class="en">Visual Data Flow: Image Capture → Preprocessing → Skeleton Extraction</li>
+              <li class="zh">音頻數據流：音頻採集 → 特徵提取 → 事件識別</li>
+              <li class="en">Audio Data Flow: Audio Acquisition → Feature Extraction → Event Recognition</li>
+              <li class="zh">多模態特徵融合模塊</li>
+              <li class="en">Multimodal Feature Fusion Module</li>
+            </ul>
           </div>
         </section>
 
         <section class="poster-section">
-          <h2>預期成果</h2>
+          <h2 class="zh">預期成果</h2>
+          <h2 class="en">Expected Results</h2>
           <div class="content">
+            <h3 class="zh">技術成果</h3>
+            <h3 class="en">Technical Achievements</h3>
             <ul>
-              <li>基於 Jetson Nano 2GB 的優化 MoveNet ONNX 模型</li>
-              <li>多模態跌倒偵測融合框架</li>
-              <li>針對邊緣設備的高效實時推理策略</li>
-              <li>保護隱私的跌倒偵測系統設計方案</li>
+              <li class="zh">基於 Jetson Nano 2GB 的優化 MoveNet ONNX 模型</li>
+              <li class="en">Optimized MoveNet ONNX model for Jetson Nano 2GB</li>
+              <li class="zh">多模態跌倒偵測融合框架</li>
+              <li class="en">Multimodal Fall Detection Fusion Framework</li>
+              <li class="zh">針對邊緣設備的高效實時推理策略</li>
+              <li class="en">Efficient Real-time Inference Strategy for Edge Devices</li>
+              <li class="zh">保護隱私的跌倒偵測系統設計方案</li>
+              <li class="en">Privacy-preserving Fall Detection System Design</li>
+            </ul>
+
+            <h3 class="zh">應用價值</h3>
+            <h3 class="en">Application Value</h3>
+            <ul>
+              <li class="zh">老年人居家安全監護</li>
+              <li class="en">Elderly Home Safety Monitoring</li>
+              <li class="zh">醫療機構輔助監護</li>
+              <li class="en">Medical Institution Assistance</li>
+              <li class="zh">邊緣 AI 應用參考</li>
+              <li class="en">Edge AI Application Reference</li>
+              <li class="zh">商業化潛力</li>
+              <li class="en">Commercial Potential</li>
             </ul>
           </div>
         </section>
@@ -73,8 +147,36 @@
     </main>
 
     <footer>
-      <p>© 2024 XXX大學</p>
+      <p class="zh">© 2024 國立成功大學</p>
+      <p class="en">© 2024 National Cheng Kung University</p>
     </footer>
   </div>
+
+  <script>
+    function switchLanguage(lang) {
+      const elements = document.querySelectorAll('.zh, .en');
+      elements.forEach(element => {
+        if (element.classList.contains(lang)) {
+          element.style.display = 'block';
+        } else {
+          element.style.display = 'none';
+        }
+      });
+      
+      const buttons = document.querySelectorAll('.language-switch button');
+      buttons.forEach(button => {
+        if (button.textContent.toLowerCase().includes(lang)) {
+          button.classList.add('active');
+        } else {
+          button.classList.remove('active');
+        }
+      });
+    }
+
+    // 初始化显示中文
+    window.onload = function() {
+      switchLanguage('zh');
+    }
+  </script>
 </body>
 </html>
