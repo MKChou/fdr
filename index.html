@@ -22,6 +22,37 @@
     </header>
 
     <main class="poster-content">
+      <section class="outline">
+        <h2 class="zh">專題大綱</h2>
+        <h2 class="en">Project Outline</h2>
+        <div class="outline-grid">
+          <div class="outline-item" onclick="scrollToSection('background')">
+            <h3 class="zh">研究背景</h3>
+            <h3 class="en">Background</h3>
+            <p class="zh">探討老年人跌倒風險與現有偵測系統的局限性</p>
+            <p class="en">Exploring elderly fall risks and limitations of existing detection systems</p>
+          </div>
+          <div class="outline-item" onclick="scrollToSection('objectives')">
+            <h3 class="zh">研究目標</h3>
+            <h3 class="en">Objectives</h3>
+            <p class="zh">開發基於 Jetson Nano 2GB 的多模態跌倒偵測系統</p>
+            <p class="en">Developing a multimodal fall detection system based on Jetson Nano 2GB</p>
+          </div>
+          <div class="outline-item" onclick="scrollToSection('architecture')">
+            <h3 class="zh">系統架構</h3>
+            <h3 class="en">Architecture</h3>
+            <p class="zh">整合視覺、音頻等多模態感測器與邊緣運算技術</p>
+            <p class="en">Integrating visual, audio sensors and edge computing technology</p>
+          </div>
+          <div class="outline-item" onclick="scrollToSection('results')">
+            <h3 class="zh">預期成果</h3>
+            <h3 class="en">Expected Results</h3>
+            <p class="zh">實現高效、準確且保護隱私的跌倒偵測解決方案</p>
+            <p class="en">Achieving efficient, accurate and privacy-preserving fall detection solution</p>
+          </div>
+        </div>
+      </section>
+
       <section class="abstract">
         <h2 class="zh">摘要</h2>
         <h2 class="en">Abstract</h2>
@@ -30,7 +61,7 @@
       </section>
 
       <div class="poster-grid">
-        <section class="poster-section">
+        <section id="background" class="poster-section">
           <h2 class="zh">研究背景與動機</h2>
           <h2 class="en">Research Background and Motivation</h2>
           <div class="content">
@@ -51,7 +82,7 @@
           </div>
         </section>
 
-        <section class="poster-section">
+        <section id="objectives" class="poster-section">
           <h2 class="zh">研究目標</h2>
           <h2 class="en">Research Objectives</h2>
           <div class="content">
@@ -77,7 +108,7 @@
           </div>
         </section>
 
-        <section class="poster-section">
+        <section id="architecture" class="poster-section">
           <h2 class="zh">系統架構</h2>
           <h2 class="en">System Architecture</h2>
           <div class="content">
@@ -112,7 +143,7 @@
           </div>
         </section>
 
-        <section class="poster-section">
+        <section id="results" class="poster-section">
           <h2 class="zh">預期成果</h2>
           <h2 class="en">Expected Results</h2>
           <div class="content">
@@ -146,6 +177,82 @@
       </div>
     </main>
 
+    <section class="system-architecture">
+      <h2 class="zh">系統架構</h2>
+      <h2 class="en">System Architecture</h2>
+      <div class="architecture-content">
+        <div class="architecture-item">
+          <h3 class="zh">硬體架構</h3>
+          <h3 class="en">Hardware Architecture</h3>
+          <ul>
+            <li class="zh">NVIDIA Jetson Nano 2GB 開發板</li>
+            <li class="en">NVIDIA Jetson Nano 2GB Development Board</li>
+            <li class="zh">四核 ARM A57 處理器</li>
+            <li class="en">Quad-core ARM A57 Processor</li>
+            <li class="zh">128 核 Maxwell GPU</li>
+            <li class="en">128-core Maxwell GPU</li>
+            <li class="zh">2GB LPDDR4 記憶體</li>
+            <li class="en">2GB LPDDR4 Memory</li>
+          </ul>
+        </div>
+        <div class="architecture-item">
+          <h3 class="zh">感測器配置</h3>
+          <h3 class="en">Sensor Configuration</h3>
+          <ul>
+            <li class="zh">MIPI CSI-2 相機</li>
+            <li class="en">MIPI CSI-2 Camera</li>
+            <li class="zh">USB 麥克風陣列</li>
+            <li class="en">USB Microphone Array</li>
+            <li class="zh">60GHz 毫米波雷達</li>
+            <li class="en">60GHz Millimeter Wave Radar</li>
+          </ul>
+        </div>
+        <div class="architecture-item">
+          <h3 class="zh">軟體架構</h3>
+          <h3 class="en">Software Architecture</h3>
+          <ul>
+            <li class="zh">多線程數據處理流水線</li>
+            <li class="en">Multithreaded Data Processing Pipeline</li>
+            <li class="zh">MoveNet ONNX 模型優化</li>
+            <li class="en">MoveNet ONNX Model Optimization</li>
+            <li class="zh">多模態特徵融合模塊</li>
+            <li class="en">Multimodal Feature Fusion Module</li>
+          </ul>
+        </div>
+        <div class="architecture-item">
+          <h3 class="zh">系統功能</h3>
+          <h3 class="en">System Features</h3>
+          <ul>
+            <li class="zh">實時跌倒偵測</li>
+            <li class="en">Real-time Fall Detection</li>
+            <li class="zh">多模態數據融合</li>
+            <li class="en">Multimodal Data Fusion</li>
+            <li class="zh">邊緣運算處理</li>
+            <li class="en">Edge Computing Processing</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="movenet-architecture">
+      <h2 class="zh">MoveNet 技術架構與原理</h2>
+      <h2 class="en">MoveNet Technical Architecture and Principles</h2>
+      <div class="movenet-content">
+        <div class="movenet-item">
+          <h3 class="zh">MoveNet 模型特點</h3>
+          <h3 class="en">MoveNet Model Features</h3>
+          <p class="zh">MoveNet 是 Google 開發的超快速且精確的人體姿態估計模型，能夠檢測人體的 17 個關鍵點。該模型提供兩個版本：Lightning 版本專為延遲敏感的應用設計，而 Thunder 版本則針對需要高精度的應用。這兩個版本都能在大多數現代設備上以超過 30 FPS 的速度運行，這對於即時健康和健身應用至關重要。</p>
+          <p class="en">MoveNet is a super-fast and accurate human pose estimation model developed by Google, capable of detecting 17 key points on the human body. The model offers two versions: the Lightning version designed for latency-sensitive applications, and the Thunder version for applications requiring high precision. Both versions can run at over 30 FPS on most modern devices, which is crucial for real-time health and fitness applications.</p>
+        </div>
+        <div class="movenet-item">
+          <h3 class="zh">技術優勢</h3>
+          <h3 class="en">Technical Advantages</h3>
+          <p class="zh">MoveNet 的關鍵優勢在於其優化的架構設計，採用了最先進的技術但保持了極低的推論時間。模型能夠在各種姿勢、環境和硬體配置下提供準確的關鍵點檢測。相較於傳統的姿態估計模型，MoveNet 在保持高精度的同時顯著降低了計算需求。</p>
+          <p class="en">The key advantage of MoveNet lies in its optimized architecture design, incorporating state-of-the-art technology while maintaining extremely low inference time. The model can provide accurate keypoint detection across various poses, environments, and hardware configurations. Compared to traditional pose estimation models, MoveNet significantly reduces computational requirements while maintaining high accuracy.</p>
+        </div>
+      </div>
+    </section>
+
     <footer>
       <p class="zh">© 2024 國立成功大學</p>
       <p class="en">© 2024 National Cheng Kung University</p>
@@ -171,6 +278,13 @@
           button.classList.remove('active');
         }
       });
+    }
+
+    function scrollToSection(sectionId) {
+      const section = document.getElementById(sectionId);
+      if (section) {
+        section.scrollIntoView({ behavior: 'smooth' });
+      }
     }
 
     // 初始化显示中文
