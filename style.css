@@ -95,23 +95,90 @@ h1 {
   white-space: nowrap;
 }
 
+/* 大纲部分 */
+.outline {
+  background-color: white;
+  padding: 25px;
+  margin-bottom: 30px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.outline h2 {
+  color: #2c3e50;
+  font-size: 1.6em;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #3498db;
+}
+
+.outline-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.outline-item {
+  padding: 15px;
+  background-color: #f8f9fa;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border: 1px solid transparent;
+}
+
+.outline-item:hover {
+  transform: translateY(-3px);
+  background-color: #e8f4fc;
+  border-color: #3498db;
+}
+
+.outline-item h3 {
+  color: #3498db;
+  font-size: 1.2em;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.outline-item h3:after {
+  content: "→";
+  margin-left: 8px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.outline-item:hover h3:after {
+  opacity: 1;
+}
+
+.outline-item p {
+  color: #34495e;
+  font-size: 1em;
+  line-height: 1.4;
+}
+
 /* 摘要部分 */
 .abstract {
-  background-color: #f8f9fa;
-  padding: 20px;
+  background-color: white;
+  padding: 25px;
   margin-bottom: 30px;
-  border-left: 4px solid #3498db;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 }
 
 .abstract h2 {
   color: #2c3e50;
-  margin-bottom: 15px;
-  font-size: 1.8em;
+  font-size: 1.6em;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #3498db;
 }
 
 .abstract p {
   text-align: justify;
-  font-size: 1.1em;
+  font-size: 1.05em;
+  margin-bottom: 15px;
 }
 
 /* 海报网格布局 */
@@ -171,13 +238,128 @@ h1 {
   left: 0;
 }
 
-/* 页脚 */
-footer {
+/* 系统架构区块 */
+.system-architecture {
+  background-color: white;
+  padding: 40px;
+  margin: 40px 0;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  border: 2px solid #3498db;
+}
+
+.system-architecture h2 {
+  color: #2c3e50;
+  font-size: 2em;
+  margin-bottom: 30px;
   text-align: center;
-  margin-top: 40px;
-  padding-top: 20px;
-  border-top: 1px solid #eee;
-  color: #7f8c8d;
+  padding-bottom: 15px;
+  border-bottom: 3px solid #3498db;
+}
+
+.architecture-content {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+}
+
+.architecture-item {
+  background-color: #f8f9fa;
+  padding: 25px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  border: 1px solid #e0e0e0;
+}
+
+.architecture-item:hover {
+  transform: translateY(-5px);
+  border-color: #3498db;
+  box-shadow: 0 5px 15px rgba(52, 152, 219, 0.1);
+}
+
+.architecture-item h3 {
+  color: #3498db;
+  font-size: 1.4em;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #3498db;
+}
+
+.architecture-item ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.architecture-item ul li {
+  margin-bottom: 12px;
+  padding-left: 25px;
+  position: relative;
+  font-size: 1.1em;
+  color: #34495e;
+}
+
+.architecture-item ul li:before {
+  content: "•";
+  color: #3498db;
+  font-weight: bold;
+  position: absolute;
+  left: 0;
+  font-size: 1.2em;
+}
+
+/* MoveNet 技术架构区块 */
+.movenet-architecture {
+  background-color: white;
+  padding: 40px;
+  margin: 40px 0;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  border: 2px solid #3498db;
+}
+
+.movenet-architecture h2 {
+  color: #2c3e50;
+  font-size: 2em;
+  margin-bottom: 30px;
+  text-align: center;
+  padding-bottom: 15px;
+  border-bottom: 3px solid #3498db;
+}
+
+.movenet-content {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+}
+
+.movenet-item {
+  background-color: #f8f9fa;
+  padding: 25px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  border: 1px solid #e0e0e0;
+}
+
+.movenet-item:hover {
+  transform: translateY(-5px);
+  border-color: #3498db;
+  box-shadow: 0 5px 15px rgba(52, 152, 219, 0.1);
+}
+
+.movenet-item h3 {
+  color: #3498db;
+  font-size: 1.4em;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #3498db;
+}
+
+.movenet-item p {
+  color: #34495e;
+  font-size: 1.1em;
+  line-height: 1.6;
+  text-align: justify;
+  margin-bottom: 15px;
 }
 
 /* 响应式设计 */
@@ -203,4 +385,23 @@ footer {
     justify-content: center;
     margin-bottom: 20px;
   }
+
+  .architecture-content,
+  .movenet-content {
+    grid-template-columns: 1fr;
+  }
+  
+  .system-architecture,
+  .movenet-architecture {
+    padding: 20px;
+  }
+}
+
+/* 页脚 */
+footer {
+  text-align: center;
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px solid #eee;
+  color: #7f8c8d;
 }
