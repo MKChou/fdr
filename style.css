@@ -89,3 +89,99 @@ body {
     background-color: #ecf0f1;
   }
   
+  .qrcode-list {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    align-items: flex-start;
+    margin: 0;
+    max-width: 400px;
+  }
+  .qrcode-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+  }
+  .qrcode-label {
+    min-width: 60px;
+    font-weight: bold;
+    font-size: 1.1rem;
+    text-align: right;
+  }
+  .qrcode-img {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+    display: block;
+  }
+  
+  #image-section {
+    text-align: left;
+  }
+  
+  /* 響應式設計：針對手機螢幕優化 */
+  @media (max-width: 600px) {
+    header h1 {
+      font-size: 1.5rem;
+    }
+    header p {
+      font-size: 1rem;
+    }
+    nav li {
+      display: block;
+      margin: 0.5rem 0;
+    }
+    section {
+      padding: 1rem 0.5rem;
+      max-width: 100%;
+    }
+    h2 {
+      font-size: 1.2rem;
+    }
+    table, th, td {
+      font-size: 0.9rem;
+    }
+    /* 讓圖片區塊（如 QR Code、系統架構圖）自動縮放 */
+    #image-section div,
+    #image-section {
+      flex-direction: column !important;
+      gap: 16px !important;
+      align-items: center !important;
+    }
+    #image-section img {
+      width: 80vw !important;
+      max-width: 200px !important;
+      height: auto !important;
+      margin: 0 auto 8px auto !important;
+      display: block;
+    }
+    #system-architecture img {
+      width: 100vw !important;
+      max-width: 100% !important;
+      height: auto !important;
+      margin: 0 auto 8px auto !important;
+      display: block;
+    }
+    ol, ul {
+      padding-left: 1rem;
+      font-size: 1rem;
+    }
+    .qrcode-list {
+      max-width: 100%;
+      gap: 20px;
+    }
+    .qrcode-row {
+      gap: 10px;
+    }
+    .qrcode-label {
+      min-width: 48px;
+      font-size: 1rem;
+    }
+    .qrcode-img {
+      width: 40vw;
+      max-width: 120px;
+      height: auto;
+    }
+  }
+  

@@ -33,21 +33,20 @@
 
   <section id="image-section" style="text-align:center;">
     <h2 style="text-align:left;">Links </h2>
-    <div style="display: flex; justify-content: center; align-items: center; gap: 32px;">
-      <div>
-        <img src="Q1.png" alt="Q1 圖片" style="width:200px;height:200px;"><br>
-        <span>DST</span>
+    <div class="qrcode-list">
+      <div class="qrcode-row">
+        <img src="Q1.png" alt="Q1 圖片" class="qrcode-img">
+        <span class="qrcode-label">DST</span>
       </div>
-      <div>
-        <img src="Q2.png" alt="Q2 圖片" style="width:200px;height:200px;"><br>
-        <span>CNN</span>
+      <div class="qrcode-row">
+        <img src="Q2.png" alt="Q2 圖片" class="qrcode-img">
+        <span class="qrcode-label">CNN</span>
       </div>
-      <div>
-        <img src="Q3.png" alt="Q3 圖片" style="width:200px;height:200px;"><br>
-        <span>LSTM</span>
+      <div class="qrcode-row">
+        <img src="Q3.png" alt="Q3 圖片" class="qrcode-img">
+        <span class="qrcode-label">LSTM</span>
       </div>
     </div>
-
   </section>
 
   <section id="motivation">
@@ -86,6 +85,15 @@
     <h2>系統架構</h2>
     <img src="system.png" alt="系統架構圖" style="max-width:90%;height:auto;display:block;margin:0 auto;">
     <p style="text-align:center;">系統架構流程圖</p>
+    <p>This system combines vision and sound to detect falls more robustly, all while running on a low-resource embedded device. The core components include:</p>
+    <ul>
+      <li>Pose estimation (MoveNet)</li>
+      <li>Audio recognition (MFCC + LSTM)</li>
+      <li>Fusion via Dempster-Shafer Theory (DST)</li>
+      <li>Confirmation using a self-trained 5-class CNN</li>
+      <li>Deployment on Jetson Nano 2GB using ONNX inference</li>
+    </ul>
+
     <h3 style="text-align:left;">系統分為四個主要執行緒：</h3>
     <ol style="text-align:left;">
       <li><b>影像姿態推論執行緒（Visual Thread）</b><br>
@@ -108,19 +116,6 @@
         偵測按鈕觸發，清除跌倒事件紀錄並重置系統狀態
       </li>
     </ol>
-  </section>
-
-  <section id="features">
-    <h2>System Features</h2>
-    <ul>
-      <li>🔍 Pose Estimation (MoveNet)</li>
-      <li>🎤 Audio Recognition (LSTM)</li>
-      <li>🧠 Action Classification (CNN)</li>
-      <li>📶 DST Fusion Logic</li>
-      <li>💻 CLI Dashboard</li>
-      <li>🔔 GPIO Feedback</li>
-      <li>⚙️ ONNX Edge Deployment</li>
-    </ul>
   </section>
 
   <section id="performance">
