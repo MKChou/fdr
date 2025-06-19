@@ -1,1 +1,168 @@
-MK TESTING---/---
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>專題作品集 | Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- 側邊導航欄 -->
+    <nav class="sidebar">
+        <div class="sidebar-header">
+            <h2>Portfolio</h2>
+            <button class="menu-toggle" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        <ul class="sidebar-menu">
+            <li><a href="#hero" class="nav-item active"><i class="fas fa-home"></i> 首頁</a></li>
+            <li><a href="#projects" class="nav-item"><i class="fas fa-code"></i> 專題項目</a></li>
+            <li><a href="#skills" class="nav-item"><i class="fas fa-tools"></i> 技能</a></li>
+            <li><a href="#timeline" class="nav-item"><i class="fas fa-clock"></i> 時間軸</a></li>
+            <li><a href="#contact" class="nav-item"><i class="fas fa-envelope"></i> 聯絡</a></li>
+        </ul>
+    </nav>
+
+    <!-- 主要內容區域 -->
+    <main class="main-content">
+        <!-- 英雄區塊 -->
+        <section id="hero" class="hero-section">
+            <div class="hero-background">
+                <div class="floating-shapes">
+                    <div class="shape shape-1"></div>
+                    <div class="shape shape-2"></div>
+                    <div class="shape shape-3"></div>
+                </div>
+            </div>
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1 class="hero-title">創新專題展示</h1>
+                    <p class="hero-subtitle">探索程式設計與創意的無限可能</p>
+                    <div class="hero-buttons">
+                        <button class="btn btn-primary" onclick="scrollToSection('projects')">
+                            <i class="fas fa-rocket"></i> 查看作品
+                        </button>
+                        <button class="btn btn-outline" onclick="scrollToSection('contact')">
+                            <i class="fas fa-paper-plane"></i> 聯絡我
+                        </button>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <div class="code-animation">
+                        <div class="code-line"></div>
+                        <div class="code-line"></div>
+                        <div class="code-line"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 專題展示區塊 -->
+        <section id="projects" class="projects-section">
+            <div class="section-header">
+                <h2>專題作品</h2>
+                <p>精選的程式設計與創意專題</p>
+            </div>
+            
+            <div class="project-filters">
+                <button class="filter-btn active" data-filter="all">全部</button>
+                <button class="filter-btn" data-filter="programming">程式設計</button>
+                <button class="filter-btn" data-filter="ui">介面設計</button>
+                <button class="filter-btn" data-filter="system">系統開發</button>
+            </div>
+
+            <div class="projects-grid" id="projectsGrid">
+                <!-- 專題卡片將由JavaScript動態生成 -->
+            </div>
+        </section>
+
+        <!-- 技能區塊 -->
+        <section id="skills" class="skills-section">
+            <div class="section-header">
+                <h2>技術技能</h2>
+                <p>專業能力與工具掌握</p>
+            </div>
+            <div class="skills-container">
+                <div class="skill-category">
+                    <h3><i class="fas fa-code"></i> 程式語言</h3>
+                    <div class="skill-items">
+                        <div class="skill-item">Python</div>
+                        <div class="skill-item">JavaScript</div>
+                        <div class="skill-item">HTML/CSS</div>
+                        <div class="skill-item">C++</div>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3><i class="fas fa-brain"></i> 專業領域</h3>
+                    <div class="skill-items">
+                        <div class="skill-item">深度學習</div>
+                        <div class="skill-item">使用者介面設計</div>
+                        <div class="skill-item">系統整合</div>
+                        <div class="skill-item">電子電路</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 時間軸區塊 -->
+        <section id="timeline" class="timeline-section">
+            <div class="section-header">
+                <h2>開發歷程</h2>
+                <p>專題開發的重要里程碑</p>
+            </div>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-date">2025-06</div>
+                    <div class="timeline-content">
+                        <h4>角色控制系統</h4>
+                        <p>設計具有獨特移動機制的角色控制系統[1]</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">2025-06</div>
+                    <div class="timeline-content">
+                        <h4>多模式軟體開發</h4>
+                        <p>開發具有多種模式的軟體並進行系統整合[2]</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">2025-06</div>
+                    <div class="timeline-content">
+                        <h4>使用者介面優化</h4>
+                        <p>對使用者介面元素進行精確控制和優化[5]</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 聯絡區塊 -->
+        <section id="contact" class="contact-section">
+            <div class="section-header">
+                <h2>聯絡方式</h2>
+                <p>歡迎與我交流討論</p>
+            </div>
+            <div class="contact-grid">
+                <div class="contact-card">
+                    <i class="fas fa-envelope"></i>
+                    <h4>電子郵件</h4>
+                    <p>your.email@example.com</p>
+                </div>
+                <div class="contact-card">
+                    <i class="fab fa-github"></i>
+                    <h4>GitHub</h4>
+                    <p>github.com/yourusername</p>
+                </div>
+                <div class="contact-card">
+                    <i class="fas fa-phone"></i>
+                    <h4>電話</h4>
+                    <p>+886 912 345 678</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
