@@ -31,7 +31,7 @@
   <section id="overview">
     <h2>Overview</h2>
     <p>
-      FallFusion is a real-time multimodal fall detection system that integrates visual and audio sensing data. It employs a self-trained CNN model for action classification and an LSTM model for fall sound recognition, applying Dempster-Shafer Theory for decision-level fusion. The system has been successfully deployed on the resource-constrained Jetson Nano 2GB platform, demonstrating efficient memory usage, ONNX model cross-platform integration, and GPIO hardware control capabilities, thereby enhancing overall stability and application feasibility.
+      FallFusion is a real-time, multimodal fall detection system that integrates both visual and audio streams. Leveraging a custom-trained CNN for action recognition and an LSTM for fall sound detection, the system employs Dempster-Shafer Theory (DST) for robust decision-level fusion. Optimized for the resource-constrained Jetson Nano 2GB, FallFusion features efficient memory management, seamless ONNX model deployment, and reliable GPIO hardware control, collectively enhancing system stability and practical deployment in real-world scenarios.
     </p>
   </section>
 
@@ -58,7 +58,7 @@
 
   <section id="motivation">
     <h2>Motivation and Challenges</h2>
-    <p>With the advent of an aging society, falls have become one of the leading causes of injury and death among the elderly. Traditional detection systems often rely on a single modality (such as cameras or microphones), but:</p>
+    <p>With an aging global population, falls have emerged as a leading cause of injury and mortality among the elderly. Conventional detection systems often depend on a single modality—such as cameras or microphones—which presents several limitations:</p>
     <ul>
       <li>Single-modality accuracy is limited: Visual data is affected by lighting and occlusion, while audio is susceptible to background noise, leading to frequent false alarms or missed detections.</li>
       <li>High resource requirements: Most deep learning systems rely on high-performance computers and cloud services, making them unsuitable for resource-constrained environments.</li>
@@ -74,7 +74,7 @@
 
   <section id="dst-reason">
     <h2>Why Dempster-Shafer Theory (DST)?</h2>
-    <p>Traditional multimodal fusion methods (such as direct score averaging) lack flexibility in handling uncertainty and conflicts. For example:</p>
+    <p>Conventional multimodal fusion techniques, such as direct score averaging, are often inflexible when dealing with uncertainty and conflicting evidence. For instance:</p>
     <ul>
       <li>The visual model may have low confidence under poor lighting.</li>
       <li>The audio model may misclassify due to background noise.</li>
@@ -82,7 +82,7 @@
     <p>Directly combining scores in such cases may reduce system accuracy.</p>
     <p><b>How DST addresses these issues:</b></p>
     <ul>
-      <li><b>Handling uncertainty:</b><br>DST can assign belief to "uncertainty" itself (e.g., m(unknown)), offering more flexibility than traditional probability methods.</li>
+      <li><b>Handling uncertainty:</b><br>DST enables explicit assignment of belief to "uncertainty" (e.g., m(unknown)), offering greater adaptability than traditional probabilistic frameworks.</li>
       <li><b>Fusing conflicting information:</b><br>When the visual and audio models disagree (e.g., one detects a fall, the other normal), DST calculates a "conflict coefficient K" and reallocates trust to the more reliable modality.</li>
       <li><b>Dynamic weight adjustment:</b><br>No need to manually set the weight of visual or audio; DST automatically determines which is more trustworthy based on the current input.</li>
     </ul>
@@ -92,13 +92,13 @@
     <h2>System Architecture</h2>
     <img src="system.png" alt="System Architecture Diagram" style="max-width:90%;height:auto;display:block;margin:0 auto;">
     <p style="text-align:center;">System architecture flowchart</p>
-    <p>This system combines vision and sound to detect falls more robustly, all while running on a low-resource embedded device. The core components include:</p>
+    <p>The system synergistically integrates visual and audio modalities to achieve robust fall detection, even on low-resource embedded hardware. Its core components include:</p>
     <ul>
       <li>Pose estimation (MoveNet)</li>
       <li>Audio recognition (MFCC + LSTM)</li>
-      <li>Fusion via Dempster-Shafer Theory (DST)</li>
-      <li>Confirmation using a self-trained 5-class CNN</li>
-      <li>Deployment on Jetson Nano 2GB using ONNX inference</li>
+      <li>Fusion using Dempster-Shafer Theory (DST)</li>
+      <li>Action verification with a custom 5-class CNN</li>
+      <li>Deployment on Jetson Nano 2GB via ONNX inference</li>
     </ul>
     <h3 style="text-align:left;">The system consists of four main threads:</h3>
     <ol style="text-align:left;">
@@ -115,7 +115,7 @@
       <li><b>Fusion & CNN Verification Thread</b><br>
         Fuses visual and audio inference scores using DST (Dempster-Shafer Theory).<br>
         If the fusion result exceeds the threshold, captures the current image and uses a 5-class CNN model (standing, sitting, lying, bending, crawling) for final confirmation.<br>
-        Updates results to the CLI Dashboard and decides whether to trigger GPIO output.
+        Updates results on the CLI Dashboard and determines whether to trigger GPIO output.
       </li>
       <li><b>GPIO Control & Button Monitoring Thread</b><br>
         Controls external hardware outputs such as LED/buzzer.<br>
@@ -127,7 +127,7 @@
   <section id="visual-component">
     <h2>Visual Component</h2>
     <h3>1. MoveNet Pose Estimation</h3>
-    <p>MoveNet is a high-performance human pose estimation model developed by Google, featuring extremely fast inference speed and high accuracy. Its lightweight design is ideal for deployment on embedded devices such as Jetson Nano, enabling stable and accurate pose analysis even under resource constraints. With MoveNet, the system can instantly capture human motion changes, providing a solid foundation for subsequent fall detection and multimodal fusion.</p>
+    <p>MoveNet, developed by Google, is a high-performance human pose estimation model renowned for its rapid inference and high accuracy. Its lightweight design is ideal for deployment on embedded devices such as Jetson Nano, enabling stable and accurate pose analysis even under resource constraints. With MoveNet, the system can instantly capture human motion changes, providing a solid foundation for subsequent fall detection and multimodal fusion.</p>
     <img src="movenet.gif" alt="MoveNet pose estimation demo" style="max-width:90%;height:auto;display:block;margin:0.5em auto;">
     <p style="text-align:center;">MoveNet real-time keypoint detection demo</p>
     <img src="movenet2.gif" alt="MoveNet fall detection process demo" style="max-width:90%;height:auto;display:block;margin:0.5em auto;">
@@ -135,7 +135,7 @@
     <p>The system applies the MoveNet ONNX model for human pose estimation, detecting 17 keypoints (e.g., head, shoulders, elbows, knees) and outputting coordinates and confidence scores. These features are used to calculate body tilt angle and center of gravity, serving as the initial basis for fall detection. The process ensures high performance and low latency, suitable for embedded platforms.</p>
     <p>To further optimize deployment, MoveNet is quantized to int8 and converted from tflite to onnx format. This significantly reduces model size and computational requirements with minimal impact on inference accuracy, enabling stable operation on resource-limited devices like Jetson Nano while maintaining real-time and precision.</p>
     <h3>2. Custom CNN Action Classification Verification</h3>
-    <p>When the DST fusion score exceeds the preset threshold, a custom-trained CNN model is activated for further action classification. This CNN is specifically designed for the system and can classify human actions into five categories (standing, sitting, lying, bending, crawling), providing a confidence score for each. If the confidence for any action exceeds the alert threshold, the system triggers an alarm. This design effectively reduces false alarms and improves the accuracy and reliability of fall detection.</p>
+    <p>When the DST fusion score surpasses a predefined threshold, a custom-trained CNN is activated for detailed action classification. This model, specifically tailored for the system, distinguishes among five human actions: standing, sitting, lying, bending, and crawling, each accompanied by a confidence score. If any action's confidence exceeds the alert threshold, the system promptly issues an alarm. This layered approach significantly reduces false positives and enhances the reliability of fall detection.</p>
     <p>The training dataset used is from <a href="https://falldataset.com/" target="_blank">Fall Detection Dataset</a>. Each folder contains sequential action images with a CSV file labeling the action type for each image. A total of 15,402 images were processed, split into 80% training and 20% validation sets. During training, both training and validation accuracy and loss are displayed in real time to monitor model learning and generalization.</p>
     <img src="CNN_confusion_matrix.png" alt="CNN confusion matrix" style="max-width:90%;height:auto;display:block;margin:0.5em auto;">
     <p style="text-align:center;">CNN action classification confusion matrix, showing prediction vs. actual distribution</p>
@@ -146,7 +146,7 @@
   <section id="audio-component">
     <h2>Audio Component</h2>
     <h3>1. Audio Data Collection and Preprocessing</h3>
-    <p>The audio module continuously collects environmental sounds using a microphone, with each recording lasting 3 seconds. After recording, noise reduction and volume normalization are performed, and the audio waveform is converted into MFCC (Mel Frequency Cepstral Coefficient) features for model input. MFCC effectively represents the time-frequency characteristics of sound and is a common feature representation in speech and event recognition.</p>
+    <p>The audio module continuously acquires ambient sounds via a microphone, segmenting each recording into three-second samples. Post-processing steps—including noise reduction and volume normalization—are applied before converting the waveform into Mel Frequency Cepstral Coefficient (MFCC) features for model input.</p>
     <img src="Audio_wave.png" alt="Audio waveform" style="max-width:90%;height:auto;display:block;margin:0.5em auto;">
     <p style="text-align:center;">Original audio waveform</p>
     <img src="Audio_MFCC.png" alt="Audio MFCC feature" style="max-width:90%;height:auto;display:block;margin:0.5em auto;">
@@ -195,7 +195,7 @@
   <section id="fusion-decision">
     <h2>Fusion & Decision</h2>
     <h3>1. Fusion Mechanism</h3>
-    <p>This system adopts Dempster-Shafer Theory (DST) as the core of multimodal decision fusion. First, inference results from the visual module (e.g., pose angle, CNN score) and the audio module (LSTM score) are obtained and converted into belief assignments. The DST fusion algorithm then calculates the final fused confidence score based on the individual confidence values, while also producing a conflict coefficient (K) that reflects the degree of disagreement between the two modalities.</p>
+    <p>At the heart of the system's multimodal decision-making lies Dempster-Shafer Theory (DST). Inference results from the visual (pose angles, CNN scores) and audio (LSTM scores) modules are first transformed into belief assignments. The DST fusion algorithm then calculates a unified confidence score and a conflict coefficient (K), quantifying the degree of disagreement between modalities.</p>
     <p>Specifically, this system utilizes a late fusion (decision-level fusion) strategy. Instead of directly combining raw sensor data or features, each modality (vision and audio) independently produces its own decision or confidence score. These scores are then fused at the decision level using DST. This approach allows each model to fully leverage its strengths and makes the overall system more robust to noise or errors in any single modality. Late fusion is especially suitable for scenarios where sensor characteristics and data types differ significantly, as in this fall detection application.</p>
     <p>The system is also designed to flexibly support different sensors and threshold settings for various environments. Depending on the deployment scenario, users can select the most appropriate combination of sensors (e.g., only vision, only audio, or both) and adjust the fusion or alert thresholds accordingly. This adaptability ensures optimal performance and reliability whether in a quiet home, a noisy public space, or other specialized settings.</p>
 
@@ -214,7 +214,7 @@
   <section id="cli-dashboard">
     <h2>CLI Dashboard & Monitoring</h2>
     <h3>1. Interface Design</h3>
-    <p>The CLI Dashboard adopts a pure text-based interface, presenting information in clear tables and blocks, with color coding (e.g., red for alerts, green for normal) to enhance instant recognition. The interface is concise and easy to read, suitable for embedded devices and remote terminal operation.</p>
+    <p>The CLI Dashboard adopts a streamlined, text-based interface, presenting information in well-organized tables and blocks. Color coding (e.g., red for alerts, green for normal) facilitates rapid status recognition. Designed for clarity and efficiency, the interface is ideal for embedded devices and remote terminal access.</p>
 
     <h3>2. Real-Time Monitoring Features</h3>
     <p>The CLI interface displays multiple key pieces of information in real time, including:
@@ -243,7 +243,7 @@
 
   <section id="performance">
     <h2>Model Performance</h2>
-    <p>The following table summarizes the key specifications, runtime behavior, and accuracy of the multimodal system, including CNN, LSTM, and DST fusion. This unified view allows for easy comparison of all core metrics.</p>
+    <p>The following table provides a comprehensive summary of the multimodal system, highlighting the integration of CNN and LSTM for action analysis and pose estimation, with DST fusion further enhancing overall performance.</p>
     <table>
       <thead>
         <tr>
@@ -297,7 +297,7 @@
     <h2>Future Improvements</h2>
     <ul>
       <li>Convert ONNX models to TensorRT to further accelerate inference speed and optimize deployment on embedded devices.</li>
-      <li>Transition from using public datasets to collecting and training on custom datasets for improved real-world relevance and accuracy.</li>
+      <li>Transition from public datasets to the collection and training of custom data, with the goal of achieving higher real-world relevance and improved accuracy.</li>
       <li>Integrate a notification system to provide instant alerts to caregivers or users in the event of a detected fall.</li>
       <li>Conduct real-world validation and benchmarking of both single-model and multimodal system accuracy to ensure robust performance in practical scenarios.</li>
     </ul>
