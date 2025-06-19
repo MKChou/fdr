@@ -4,14 +4,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MK love you forever
-  </title>
+  <title>MK love you forever</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <header>
-    <h1>Real-Time Multimodal Fall Detection via Audio-Visual Fusion and DST on Edge Devices
-    </h1>
+    <h1>Real-Time Multimodal Fall Detection via Audio-Visual Fusion and DST on Edge Devices</h1>
     <p> MK Chou</p>
   </header>
 
@@ -32,59 +30,59 @@
   </section>
 
   <section id="image-section" style="text-align:center;">
-    <h2 style="text-align:left;">Links </h2>
+    <h2 style="text-align:left;">Links</h2>
     <div class="qrcode-list">
       <div class="qrcode-row">
-        <img src="Q1.png" alt="Q1 圖片" class="qrcode-img">
+        <img src="Q1.png" alt="Q1 image" class="qrcode-img">
         <span class="qrcode-label">DST</span>
       </div>
       <div class="qrcode-row">
-        <img src="Q2.png" alt="Q2 圖片" class="qrcode-img">
+        <img src="Q2.png" alt="Q2 image" class="qrcode-img">
         <span class="qrcode-label">CNN</span>
       </div>
       <div class="qrcode-row">
-        <img src="Q3.png" alt="Q3 圖片" class="qrcode-img">
+        <img src="Q3.png" alt="Q3 image" class="qrcode-img">
         <span class="qrcode-label">LSTM</span>
       </div>
     </div>
   </section>
 
   <section id="motivation">
-    <h2>研究動機與問題點</h2>
-    <p>隨著高齡化社會來臨，跌倒事件已成為老年人傷亡的主要原因之一。傳統的偵測系統多依賴單一模態（如攝影機或麥克風），但：</p>
+    <h2>Motivation and Challenges</h2>
+    <p>With the advent of an aging society, falls have become one of the leading causes of injury and death among the elderly. Traditional detection systems often rely on a single modality (such as cameras or microphones), but:</p>
     <ul>
-      <li>單一模態準確率受限：視覺受光影遮蔽影響，音訊易受背景噪音干擾，單獨判斷常出現誤報或漏報。</li>
-      <li>高資源門檻：大多數深度學習系統仰賴高效能電腦與雲端服務，無法適用於資源受限環境。</li>
-      <li>隱私與延遲問題：影像上傳雲端進行判斷易引發隱私疑慮，且無法提供即時回應。</li>
+      <li>Single-modality accuracy is limited: Visual data is affected by lighting and occlusion, while audio is susceptible to background noise, leading to frequent false alarms or missed detections.</li>
+      <li>High resource requirements: Most deep learning systems rely on high-performance computers and cloud services, making them unsuitable for resource-constrained environments.</li>
+      <li>Privacy and latency issues: Uploading images to the cloud for analysis raises privacy concerns and cannot provide real-time responses.</li>
     </ul>
-    <p>因此，我們希望設計一套能：</p>
+    <p>Therefore, we aim to design a system that can:</p>
     <ul>
-      <li>整合多種感測資料（視覺＋音訊），提升辨識精度。</li>
-      <li>部署於低記憶體、低耗電的嵌入式平台，如 Jetson Nano 2GB。</li>
-      <li>支援即時反應與硬體互動（LED、蜂鳴器），提升警示效率與真實應用價值。</li>
+      <li>Integrate multiple sensing data (visual + audio) to improve recognition accuracy.</li>
+      <li>Deploy on low-memory, low-power embedded platforms such as Jetson Nano 2GB.</li>
+      <li>Support real-time response and hardware interaction (LED, buzzer) to enhance alert efficiency and practical value.</li>
     </ul>
   </section>
 
   <section id="dst-reason">
-    <h2>為何選用 Dempster-Shafer Theory（DST）？</h2>
-    <p>傳統多模態融合（例如直接平均分數）在處理不確定性與衝突時缺乏彈性。例如：</p>
+    <h2>Why Dempster-Shafer Theory (DST)?</h2>
+    <p>Traditional multimodal fusion methods (such as direct score averaging) lack flexibility in handling uncertainty and conflicts. For example:</p>
     <ul>
-      <li>視覺模型在光源不足時可能信心值低。</li>
-      <li>音訊模型在背景噪音中可能出現誤判。</li>
+      <li>The visual model may have low confidence under poor lighting.</li>
+      <li>The audio model may misclassify due to background noise.</li>
     </ul>
-    <p>這時若直接合併兩者分數，反而可能降低系統準確性。</p>
-    <p><b>DST 解決痛點的方式：</b></p>
+    <p>Directly combining scores in such cases may reduce system accuracy.</p>
+    <p><b>How DST addresses these issues:</b></p>
     <ul>
-      <li><b>處理不確定性：</b><br>DST 可針對「不確定」本身給予一個信任分配（例如 m(未知)），比傳統機率方法更有彈性。</li>
-      <li><b>融合衝突資訊：</b><br>當視覺模型與音訊模型意見不同時（如一個判斷跌倒、一個判斷正常），DST 可計算「衝突係數 K」，並重新分配信任給更可靠的模態。</li>
-      <li><b>動態權重調整：</b><br>不需手動設定視覺或音訊的比重，而是依照當下輸入資料自動決定誰更可信。</li>
+      <li><b>Handling uncertainty:</b><br>DST can assign belief to "uncertainty" itself (e.g., m(unknown)), offering more flexibility than traditional probability methods.</li>
+      <li><b>Fusing conflicting information:</b><br>When the visual and audio models disagree (e.g., one detects a fall, the other normal), DST calculates a "conflict coefficient K" and reallocates trust to the more reliable modality.</li>
+      <li><b>Dynamic weight adjustment:</b><br>No need to manually set the weight of visual or audio; DST automatically determines which is more trustworthy based on the current input.</li>
     </ul>
   </section>
 
   <section id="system-architecture">
-    <h2>系統架構</h2>
-    <img src="system.png" alt="系統架構圖" style="max-width:90%;height:auto;display:block;margin:0 auto;">
-    <p style="text-align:center;">系統架構流程圖</p>
+    <h2>System Architecture</h2>
+    <img src="system.png" alt="System Architecture Diagram" style="max-width:90%;height:auto;display:block;margin:0 auto;">
+    <p style="text-align:center;">System architecture flowchart</p>
     <p>This system combines vision and sound to detect falls more robustly, all while running on a low-resource embedded device. The core components include:</p>
     <ul>
       <li>Pose estimation (MoveNet)</li>
@@ -93,29 +91,124 @@
       <li>Confirmation using a self-trained 5-class CNN</li>
       <li>Deployment on Jetson Nano 2GB using ONNX inference</li>
     </ul>
-
-    <h3 style="text-align:left;">系統分為四個主要執行緒：</h3>
+    <h3 style="text-align:left;">The system consists of four main threads:</h3>
     <ol style="text-align:left;">
-      <li><b>影像姿態推論執行緒（Visual Thread）</b><br>
-        擷取攝影機影像，經過 Resize 與轉換後輸入至 MoveNet ONNX 模型<br>
-        推論出 17 個人體關鍵點位置與置信度<br>
-        計算身體傾斜角度，推估是否為可疑姿勢（如躺、跌倒）
+      <li><b>Visual Pose Inference Thread</b><br>
+        Captures camera images, resizes and preprocesses them for input to the MoveNet ONNX model.<br>
+        Infers 17 human keypoints and confidence scores.<br>
+        Calculates body tilt angle to estimate suspicious postures (e.g., lying, falling).
       </li>
-      <li><b>音訊辨識執行緒（Audio Thread）</b><br>
-        使用麥克風實時錄音（3 秒）<br>
-        將音訊轉為 MFCC（Mel Frequency Cepstral Coefficients）特徵圖<br>
-        輸入至 LSTM 音訊模型（ONNX），輸出是否為跌倒聲音的分數（0~1）
+      <li><b>Audio Recognition Thread</b><br>
+        Continuously records audio (3 seconds) via microphone.<br>
+        Converts audio to MFCC (Mel Frequency Cepstral Coefficients) feature maps.<br>
+        Inputs to LSTM audio model (ONNX), outputs a fall sound score (0~1).
       </li>
-      <li><b>決策融合與 CNN 驗證執行緒（Fusion & CNN Thread）</b><br>
-        根據視覺與音訊推論分數，使用 DST（Dempster-Shafer Theory） 計算融合信心值<br>
-        若融合結果高於門檻，擷取當下影像，使用 CNN 多分類模型（5 類：站、坐、躺、彎、爬）進行最終確認<br>
-        結果更新至 CLI Dashboard，並決定是否觸發 GPIO 輸出
+      <li><b>Fusion & CNN Verification Thread</b><br>
+        Fuses visual and audio inference scores using DST (Dempster-Shafer Theory).<br>
+        If the fusion result exceeds the threshold, captures the current image and uses a 5-class CNN model (standing, sitting, lying, bending, crawling) for final confirmation.<br>
+        Updates results to the CLI Dashboard and decides whether to trigger GPIO output.
       </li>
-      <li><b>GPIO 控制與按鍵監聽執行緒（GPIO Thread）</b><br>
-        控制 LED / 蜂鳴器 等外部硬體輸出<br>
-        偵測按鈕觸發，清除跌倒事件紀錄並重置系統狀態
+      <li><b>GPIO Control & Button Monitoring Thread</b><br>
+        Controls external hardware outputs such as LED/buzzer.<br>
+        Detects button triggers, clears fall event records, and resets system status.
       </li>
     </ol>
+  </section>
+
+  <section id="visual-component">
+    <h2>Visual Component</h2>
+    <h3>1. MoveNet Pose Estimation</h3>
+    <p>MoveNet is a high-performance human pose estimation model developed by Google, featuring extremely fast inference speed and high accuracy. Its lightweight design is ideal for deployment on embedded devices such as Jetson Nano, enabling stable and accurate pose analysis even under resource constraints. With MoveNet, the system can instantly capture human motion changes, providing a solid foundation for subsequent fall detection and multimodal fusion.</p>
+    <img src="movenet.gif" alt="MoveNet pose estimation demo" style="max-width:90%;height:auto;display:block;margin:0.5em auto;">
+    <p style="text-align:center;">MoveNet real-time keypoint detection demo</p>
+    <img src="movenet2.gif" alt="MoveNet fall detection process demo" style="max-width:90%;height:auto;display:block;margin:0.5em auto;">
+    <p style="text-align:center;">MoveNet applied to fall detection process animation</p>
+    <p>The system applies the MoveNet ONNX model for human pose estimation, detecting 17 keypoints (e.g., head, shoulders, elbows, knees) and outputting coordinates and confidence scores. These features are used to calculate body tilt angle and center of gravity, serving as the initial basis for fall detection. The process ensures high performance and low latency, suitable for embedded platforms.</p>
+    <p>To further optimize deployment, MoveNet is quantized to int8 and converted from tflite to onnx format. This significantly reduces model size and computational requirements with minimal impact on inference accuracy, enabling stable operation on resource-limited devices like Jetson Nano while maintaining real-time and precision.</p>
+    <h3>2. Custom CNN Action Classification Verification</h3>
+    <p>When the DST fusion score exceeds the preset threshold, a custom-trained CNN model is activated for further action classification. This CNN is specifically designed for the system and can classify human actions into five categories (standing, sitting, lying, bending, crawling), providing a confidence score for each. If the confidence for any action exceeds the alert threshold, the system triggers an alarm. This design effectively reduces false alarms and improves the accuracy and reliability of fall detection.</p>
+    <p>The training dataset used is from <a href="https://falldataset.com/" target="_blank">Fall Detection Dataset</a>. Each folder contains sequential action images with a CSV file labeling the action type for each image. A total of 15,402 images were processed, split into 80% training and 20% validation sets. During training, both training and validation accuracy and loss are displayed in real time to monitor model learning and generalization.</p>
+    <img src="CNN_confusion_matrix.png" alt="CNN confusion matrix" style="max-width:90%;height:auto;display:block;margin:0.5em auto;">
+    <p style="text-align:center;">CNN action classification confusion matrix, showing prediction vs. actual distribution</p>
+    <img src="CNN_acc_curve.png" alt="CNN accuracy curve" style="max-width:90%;height:auto;display:block;margin:0.5em auto;">
+    <p style="text-align:center;">CNN training and validation accuracy curves</p>
+  </section>
+
+  <section id="audio-component">
+    <h2>Audio Component</h2>
+    <h3>1. Audio Data Collection and Preprocessing</h3>
+    <p>The audio module continuously collects environmental sounds using a microphone, with each recording lasting 3 seconds. After recording, noise reduction and volume normalization are performed, and the audio waveform is converted into MFCC (Mel Frequency Cepstral Coefficient) features for model input. MFCC effectively represents the time-frequency characteristics of sound and is a common feature representation in speech and event recognition.</p>
+    <img src="Audio_wave.png" alt="Audio waveform" style="max-width:90%;height:auto;display:block;margin:0.5em auto;">
+    <p style="text-align:center;">Original audio waveform</p>
+    <img src="Audio_MFCC.png" alt="Audio MFCC feature" style="max-width:90%;height:auto;display:block;margin:0.5em auto;">
+    <p style="text-align:center;">Audio waveform converted to MFCC feature for model input</p>
+
+    <h3>2. Dataset Source</h3>
+    <p>The audio model is trained using the <a href="https://www.kaggle.com/datasets/antonygarciag/fall-audio-detection-dataset/data" target="_blank">AFE: Sound Analysis for Fall Event detection</a> dataset, which contains various fall events and daily environmental sounds, with each audio segment labeled as fall-related or not. These annotations help the model learn to distinguish fall sounds from general noise, improving recognition accuracy.</p>
+
+    <h3>3. LSTM Model Training and Performance</h3>
+    <ul>
+      <li><b>Model architecture:</b> LSTM(64) → Dropout(0.5) → Dense(32, relu) → Dense(1, sigmoid)</li>
+      <li><b>Loss function:</b> binary_crossentropy</li>
+      <li><b>Optimizer:</b> Adam</li>
+      <li><b>Epochs:</b> 30</li>
+      <li><b>Batch size:</b> 16</li>
+      <li><b>Train/Test Split:</b> 80/20</li>
+    </ul>
+    <p>MFCC features are used as input to train the LSTM model for fall sound recognition. The following figures show the LSTM training loss/accuracy curves, test set confusion matrix, and ROC curve, demonstrating the model's excellent performance in classifying fall and non-fall events.</p>
+    <img src="Audio_LSTM_training_results.png" alt="LSTM training loss/accuracy" style="max-width:90%;height:auto;display:block;margin:0.5em auto;">
+    <p style="text-align:center;">LSTM training loss and accuracy curves</p>
+    <img src="Audio_Confusion_Matrix.png" alt="LSTM confusion matrix" style="max-width:90%;height:auto;display:block;margin:0.5em auto;">
+    <p style="text-align:center;">LSTM model confusion matrix on the test set</p>
+    <img src="Audio_ROCCurve.png" alt="LSTM ROC curve" style="max-width:90%;height:auto;display:block;margin:0.5em auto;">
+    <p style="text-align:center;">LSTM model ROC curve, AUC indicates excellent classification ability</p>
+
+    <h3>4. Advanced Evaluation Metrics</h3>
+    <ul>
+      <li><b>Confusion Matrix:</b> [[91, 2], [3, 94]]</li>
+      <li><b>Accuracy:</b> 0.97</li>
+      <li><b>Precision:</b> 0.9792</li>
+      <li><b>Recall:</b> 0.9691</li>
+      <li><b>F1-score:</b> 0.9741</li>
+      <li><b>AUC Score:</b> 0.9973</li>
+      <li><b>ROC curve:</b> Nearly perfect (see above)</li>
+    </ul>
+
+    <h3>5. Practical Application Plan</h3>
+    <ul>
+      <li>Real-time audio collection with recording equipment</li>
+      <li>Convert audio to MFCC (40 dimensions, 3 seconds, 22050Hz)</li>
+      <li>Input to the trained model (.tflite/.onnx) to determine if a fall event has occurred</li>
+      <li>Output a "fall probability score" for use in multimodal fusion (combined with video, accelerometer, etc.)</li>
+    </ul>
+  </section>
+
+  <section id="fusion-decision">
+    <h2>Fusion & Decision</h2>
+    <p>The fusion and decision module integrates the inference results from the visual and audio modules, using Dempster-Shafer Theory (DST) to dynamically adjust weights and flexibly handle uncertainty and conflicts.</p>
+    <ul>
+      <li>Score collection: Receives inference scores from the visual and audio modules.</li>
+      <li>DST fusion: Calculates trust allocation and conflict coefficient (K), automatically adjusts weights, and obtains the final fusion confidence score.</li>
+      <li>Threshold judgment: If the fusion confidence exceeds the threshold, triggers CNN verification.</li>
+      <li>CNN verification: Uses a custom 5-class CNN for final action classification, improving recognition accuracy.</li>
+      <li>Decision output: Updates the CLI Dashboard and determines whether to trigger GPIO output based on the result.</li>
+    </ul>
+  </section>
+
+  <section id="cli-dashboard">
+    <h2>CLI Dashboard & Monitoring</h2>
+    <p>This system provides a lightweight command-line interface (CLI) for real-time monitoring of system status and decisions. The interface is concise and information-rich, suitable for embedded devices or remote monitoring. Key features include:</p>
+    <ul>
+      <li>Real-time display of pose angles, MFCC audio features, and model scores.</li>
+      <li>Simultaneous presentation of DST fusion score and conflict coefficient (K).</li>
+      <li>Includes event logs and alert confirmation for tracking fall events and handling processes.</li>
+    </ul>
+    <p style="margin-top:0.5em;">A lightweight command-line interface provides a full view of the system's status and decisions.<br>
+    Real-time display of pose angles, MFCC values, model scores.<br>
+    Shows DST fusion score and conflict coefficient (K).<br>
+    Includes event log and alert confirmation.</p>
+    <img src="CLI.png" alt="CLI Dashboard interface" style="max-width:90%;height:auto;display:block;margin:0 auto;">
+    <p style="text-align:center;">CLI Dashboard monitoring interface demo</p>
   </section>
 
   <section id="performance">
@@ -132,7 +225,7 @@
   </section>
 
   <footer id="contact">
-    <p>Developed by 周明坤 Chou, Ming-kun | NCKU Cross-College Elite Program</p>
+    <p>Developed by Chou, Ming-kun | NCKU Cross-College Elite Program</p>
     <p>Email: AN4096750@gs.ncku.edu.tw</p>
   </footer>
 
