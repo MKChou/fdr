@@ -16,7 +16,13 @@
   <nav>
     <ul>
       <li><a href="#overview">Overview</a></li>
-      <li><a href="#features">Features</a></li>
+      <li><a href="#motivation">Motivation</a></li>
+      <li><a href="#dst-reason">DST</a></li>
+      <li><a href="#system-architecture">System Architecture</a></li>
+      <li><a href="#visual-component">Visual</a></li>
+      <li><a href="#audio-component">Audio</a></li>
+      <li><a href="#fusion-decision">Fusion</a></li>
+      <li><a href="#cli-dashboard">CLI</a></li>
       <li><a href="#performance">Performance</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
@@ -35,14 +41,17 @@
       <div class="qrcode-row">
         <img src="Q1.png" alt="Q1 image" class="qrcode-img">
         <span class="qrcode-label">DST</span>
+        <a href="https://github.com/MKChou/DST-FallNet" target="_blank" style="margin-left:12px;">GitHub Repo 1</a>
       </div>
       <div class="qrcode-row">
         <img src="Q2.png" alt="Q2 image" class="qrcode-img">
         <span class="qrcode-label">CNN</span>
+        <a href="https://github.com/MKChou/fall-detection-cnn" target="_blank" style="margin-left:12px;">GitHub Repo 2</a>
       </div>
       <div class="qrcode-row">
         <img src="Q3.png" alt="Q3 image" class="qrcode-img">
         <span class="qrcode-label">LSTM</span>
+        <a href="https://github.com/MKChou/fall-sound-detection-lstm" target="_blank" style="margin-left:12px;">GitHub Repo 3</a>
       </div>
     </div>
   </section>
@@ -185,43 +194,113 @@
 
   <section id="fusion-decision">
     <h2>Fusion & Decision</h2>
-    <p>The fusion and decision module integrates the inference results from the visual and audio modules, using Dempster-Shafer Theory (DST) to dynamically adjust weights and flexibly handle uncertainty and conflicts.</p>
-    <ul>
-      <li>Score collection: Receives inference scores from the visual and audio modules.</li>
-      <li>DST fusion: Calculates trust allocation and conflict coefficient (K), automatically adjusts weights, and obtains the final fusion confidence score.</li>
-      <li>Threshold judgment: If the fusion confidence exceeds the threshold, triggers CNN verification.</li>
-      <li>CNN verification: Uses a custom 5-class CNN for final action classification, improving recognition accuracy.</li>
-      <li>Decision output: Updates the CLI Dashboard and determines whether to trigger GPIO output based on the result.</li>
-    </ul>
+    <h3>1. Fusion Mechanism</h3>
+    <p>This system adopts Dempster-Shafer Theory (DST) as the core of multimodal decision fusion. First, inference results from the visual module (e.g., pose angle, CNN score) and the audio module (LSTM score) are obtained and converted into belief assignments. The DST fusion algorithm then calculates the final fused confidence score based on the individual confidence values, while also producing a conflict coefficient (K) that reflects the degree of disagreement between the two modalities.</p>
+    <p>Specifically, this system utilizes a late fusion (decision-level fusion) strategy. Instead of directly combining raw sensor data or features, each modality (vision and audio) independently produces its own decision or confidence score. These scores are then fused at the decision level using DST. This approach allows each model to fully leverage its strengths and makes the overall system more robust to noise or errors in any single modality. Late fusion is especially suitable for scenarios where sensor characteristics and data types differ significantly, as in this fall detection application.</p>
+    <p>The system is also designed to flexibly support different sensors and threshold settings for various environments. Depending on the deployment scenario, users can select the most appropriate combination of sensors (e.g., only vision, only audio, or both) and adjust the fusion or alert thresholds accordingly. This adaptability ensures optimal performance and reliability whether in a quiet home, a noisy public space, or other specialized settings.</p>
+
+    <h3>2. Threshold & Trigger</h3>
+    <p>When the DST fused confidence score exceeds a preset threshold, the system further activates the CNN model for multi-class action verification. If the CNN determines a high-risk action (such as lying or crawling) and the confidence exceeds the alert threshold, an alert signal (e.g., buzzer, LED) is triggered and the event is logged in the CLI Dashboard.</p>
+
+    <h3>3. Conflict Handling</h3>
+    <p>One major advantage of DST is its ability to dynamically handle conflicts between modalities. For example, when the visual and audio modules produce opposite results, DST calculates the conflict coefficient K and automatically adjusts the weights, assigning trust to the more reliable source. This prevents system failure due to misjudgment by a single modality.</p>
+
+    <h3>4. Practical Value</h3>
+    <p>DST-based fusion and decision-making significantly enhance the system's robustness and accuracy. Even when a single sensor is disturbed (e.g., poor lighting, environmental noise), the system can still make stable judgments based on multimodal information, reducing false alarms and missed detections. This makes it suitable for long-term automated monitoring applications.</p>
+
+  
   </section>
 
   <section id="cli-dashboard">
     <h2>CLI Dashboard & Monitoring</h2>
-    <p>This system provides a lightweight command-line interface (CLI) for real-time monitoring of system status and decisions. The interface is concise and information-rich, suitable for embedded devices or remote monitoring. Key features include:</p>
-    <ul>
-      <li>Real-time display of pose angles, MFCC audio features, and model scores.</li>
-      <li>Simultaneous presentation of DST fusion score and conflict coefficient (K).</li>
-      <li>Includes event logs and alert confirmation for tracking fall events and handling processes.</li>
-    </ul>
-    <p style="margin-top:0.5em;">A lightweight command-line interface provides a full view of the system's status and decisions.<br>
-    Real-time display of pose angles, MFCC values, model scores.<br>
-    Shows DST fusion score and conflict coefficient (K).<br>
-    Includes event log and alert confirmation.</p>
+    <h3>1. Interface Design</h3>
+    <p>The CLI Dashboard adopts a pure text-based interface, presenting information in clear tables and blocks, with color coding (e.g., red for alerts, green for normal) to enhance instant recognition. The interface is concise and easy to read, suitable for embedded devices and remote terminal operation.</p>
+
+    <h3>2. Real-Time Monitoring Features</h3>
+    <p>The CLI interface displays multiple key pieces of information in real time, including:
+      <ul>
+        <li>System runtime status (memory, CPU usage, latency, etc.)</li>
+        <li>MoveNet pose keypoint coordinates and confidence values</li>
+        <li>Audio MFCC features and LSTM scores</li>
+        <li>DST fusion score and conflict coefficient</li>
+        <li>CNN multi-class results and confidence values</li>
+        <li>Current alert status (e.g., fall detected, alert triggered)</li>
+      </ul>
+    </p>
+
+    <h3>3. Event Log and Alert Confirmation</h3>
+    <p>The lower part of the interface records all fall events with time, confidence score, and action type for easy query and tracking. When an alert is triggered, it is clearly marked, and users can confirm or reset events directly via the CLI.</p>
+
+    <h3>4. Cross-Platform and Lightweight</h3>
+    <p>The CLI Dashboard runs on various operating systems and supports remote SSH connections, making it ideal for embedded platforms (such as Jetson Nano) or server-side deployment. Its lightweight nature ensures smooth operation even in resource-constrained environments.</p>
+
+    <h3>5. Practical Value</h3>
+    <p>The CLI interface enables on-site personnel or remote maintenance engineers to instantly grasp system status, quickly respond to abnormal events, and serves as a foundation for long-term monitoring and data analysis. It is especially valuable in environments where graphical interfaces are unavailable (e.g., factories, edge devices).</p>
+
     <img src="CLI.png" alt="CLI Dashboard interface" style="max-width:90%;height:auto;display:block;margin:0 auto;">
     <p style="text-align:center;">CLI Dashboard monitoring interface demo</p>
   </section>
 
   <section id="performance">
     <h2>Model Performance</h2>
+    <p>The following table summarizes the key specifications, runtime behavior, and accuracy of the multimodal system, including CNN, LSTM, and DST fusion. This unified view allows for easy comparison of all core metrics.</p>
     <table>
       <thead>
-        <tr><th>Model</th><th>Accuracy</th><th>Size</th><th>Input</th></tr>
+        <tr>
+          <th>Model</th>
+          <th>Input Shape</th>
+          <th>Inference Latency</th>
+          <th>Accuracy</th>
+          <th>DST Fusion Latency</th>
+          <th>Status</th>
+        </tr>
       </thead>
       <tbody>
-        <tr><td>CNN (5-class)</td><td>89.2%</td><td>~3.2MB</td><td>192×192×3</td></tr>
-        <tr><td>LSTM (Audio)</td><td>97%</td><td>~1.1MB</td><td>MFCC (130×40)</td></tr>
+        <tr>
+          <td>CNN (5-class)</td>
+          <td>192×192×4</td>
+          <td>20-40 ms</td>
+          <td>87.4%</td>
+          <td>-</td>
+          <td>Deployed</td>
+        </tr>
+        <tr>
+          <td>LSTM (Audio)</td>
+          <td>1×8×40 (MFCC)</td>
+          <td>30-50 ms</td>
+          <td>86.3%</td>
+          <td>-</td>
+          <td>Deployed</td>
+        </tr>
+        <tr>
+          <td>Pose Estimation</td>
+          <td>-</td>
+          <td>250-350 ms</td>
+          <td>-</td>
+          <td>-</td>
+          <td>Deployed</td>
+        </tr>
+        <tr>
+          <td>DST Fusion</td>
+          <td>-</td>
+          <td>-</td>
+          <td>-</td>
+          <td>50-60 us</td>
+          <td>Under evaluation</td>
+        </tr>
       </tbody>
     </table>
+    <p>This table demonstrates a multimodal system that combines CNN and LSTM for action analysis and pose estimation, leveraging DST fusion to further enhance overall performance. The system uses different input formats (image and audio features) and is designed for robust, real-time operation in diverse environments.</p>
+  </section>
+
+  <section id="future-improvements">
+    <h2>Future Improvements</h2>
+    <ul>
+      <li>Convert ONNX models to TensorRT to further accelerate inference speed and optimize deployment on embedded devices.</li>
+      <li>Transition from using public datasets to collecting and training on custom datasets for improved real-world relevance and accuracy.</li>
+      <li>Integrate a notification system to provide instant alerts to caregivers or users in the event of a detected fall.</li>
+      <li>Conduct real-world validation and benchmarking of both single-model and multimodal system accuracy to ensure robust performance in practical scenarios.</li>
+    </ul>
   </section>
 
   <footer id="contact">
