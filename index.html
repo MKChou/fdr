@@ -1,168 +1,146 @@
+<!-- index.html -->
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>專題作品集 | Portfolio</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MK love you forever
+  </title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- 側邊導航欄 -->
-    <nav class="sidebar">
-        <div class="sidebar-header">
-            <h2>Portfolio</h2>
-            <button class="menu-toggle" id="menuToggle">
-                <i class="fas fa-bars"></i>
-            </button>
-        </div>
-        <ul class="sidebar-menu">
-            <li><a href="#hero" class="nav-item active"><i class="fas fa-home"></i> 首頁</a></li>
-            <li><a href="#projects" class="nav-item"><i class="fas fa-code"></i> 專題項目</a></li>
-            <li><a href="#skills" class="nav-item"><i class="fas fa-tools"></i> 技能</a></li>
-            <li><a href="#timeline" class="nav-item"><i class="fas fa-clock"></i> 時間軸</a></li>
-            <li><a href="#contact" class="nav-item"><i class="fas fa-envelope"></i> 聯絡</a></li>
-        </ul>
-    </nav>
+  <header>
+    <h1>Real-Time Multimodal Fall Detection via Audio-Visual Fusion and DST on Edge Devices
+    </h1>
+    <p> MK Chou</p>
+  </header>
 
-    <!-- 主要內容區域 -->
-    <main class="main-content">
-        <!-- 英雄區塊 -->
-        <section id="hero" class="hero-section">
-            <div class="hero-background">
-                <div class="floating-shapes">
-                    <div class="shape shape-1"></div>
-                    <div class="shape shape-2"></div>
-                    <div class="shape shape-3"></div>
-                </div>
-            </div>
-            <div class="hero-content">
-                <div class="hero-text">
-                    <h1 class="hero-title">創新專題展示</h1>
-                    <p class="hero-subtitle">探索程式設計與創意的無限可能</p>
-                    <div class="hero-buttons">
-                        <button class="btn btn-primary" onclick="scrollToSection('projects')">
-                            <i class="fas fa-rocket"></i> 查看作品
-                        </button>
-                        <button class="btn btn-outline" onclick="scrollToSection('contact')">
-                            <i class="fas fa-paper-plane"></i> 聯絡我
-                        </button>
-                    </div>
-                </div>
-                <div class="hero-image">
-                    <div class="code-animation">
-                        <div class="code-line"></div>
-                        <div class="code-line"></div>
-                        <div class="code-line"></div>
-                    </div>
-                </div>
-            </div>
-        </section>
+  <nav>
+    <ul>
+      <li><a href="#overview">Overview</a></li>
+      <li><a href="#features">Features</a></li>
+      <li><a href="#performance">Performance</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
 
-        <!-- 專題展示區塊 -->
-        <section id="projects" class="projects-section">
-            <div class="section-header">
-                <h2>專題作品</h2>
-                <p>精選的程式設計與創意專題</p>
-            </div>
-            
-            <div class="project-filters">
-                <button class="filter-btn active" data-filter="all">全部</button>
-                <button class="filter-btn" data-filter="programming">程式設計</button>
-                <button class="filter-btn" data-filter="ui">介面設計</button>
-                <button class="filter-btn" data-filter="system">系統開發</button>
-            </div>
+  <section id="overview">
+    <h2>Overview</h2>
+    <p>
+      FallFusion is a real-time multimodal fall detection system that integrates visual and audio sensing data. It employs a self-trained CNN model for action classification and an LSTM model for fall sound recognition, applying Dempster-Shafer Theory for decision-level fusion. The system has been successfully deployed on the resource-constrained Jetson Nano 2GB platform, demonstrating efficient memory usage, ONNX model cross-platform integration, and GPIO hardware control capabilities, thereby enhancing overall stability and application feasibility.
+    </p>
+  </section>
 
-            <div class="projects-grid" id="projectsGrid">
-                <!-- 專題卡片將由JavaScript動態生成 -->
-            </div>
-        </section>
+  <section id="image-section" style="text-align:center;">
+    <h2 style="text-align:left;">Links </h2>
+    <div style="display: flex; justify-content: center; align-items: center; gap: 32px;">
+      <div>
+        <img src="Q1.png" alt="Q1 圖片" style="width:200px;height:200px;"><br>
+        <span>DST</span>
+      </div>
+      <div>
+        <img src="Q2.png" alt="Q2 圖片" style="width:200px;height:200px;"><br>
+        <span>CNN</span>
+      </div>
+      <div>
+        <img src="Q3.png" alt="Q3 圖片" style="width:200px;height:200px;"><br>
+        <span>LSTM</span>
+      </div>
+    </div>
 
-        <!-- 技能區塊 -->
-        <section id="skills" class="skills-section">
-            <div class="section-header">
-                <h2>技術技能</h2>
-                <p>專業能力與工具掌握</p>
-            </div>
-            <div class="skills-container">
-                <div class="skill-category">
-                    <h3><i class="fas fa-code"></i> 程式語言</h3>
-                    <div class="skill-items">
-                        <div class="skill-item">Python</div>
-                        <div class="skill-item">JavaScript</div>
-                        <div class="skill-item">HTML/CSS</div>
-                        <div class="skill-item">C++</div>
-                    </div>
-                </div>
-                <div class="skill-category">
-                    <h3><i class="fas fa-brain"></i> 專業領域</h3>
-                    <div class="skill-items">
-                        <div class="skill-item">深度學習</div>
-                        <div class="skill-item">使用者介面設計</div>
-                        <div class="skill-item">系統整合</div>
-                        <div class="skill-item">電子電路</div>
-                    </div>
-                </div>
-            </div>
-        </section>
+  </section>
 
-        <!-- 時間軸區塊 -->
-        <section id="timeline" class="timeline-section">
-            <div class="section-header">
-                <h2>開發歷程</h2>
-                <p>專題開發的重要里程碑</p>
-            </div>
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-date">2025-06</div>
-                    <div class="timeline-content">
-                        <h4>角色控制系統</h4>
-                        <p>設計具有獨特移動機制的角色控制系統[1]</p>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-date">2025-06</div>
-                    <div class="timeline-content">
-                        <h4>多模式軟體開發</h4>
-                        <p>開發具有多種模式的軟體並進行系統整合[2]</p>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-date">2025-06</div>
-                    <div class="timeline-content">
-                        <h4>使用者介面優化</h4>
-                        <p>對使用者介面元素進行精確控制和優化[5]</p>
-                    </div>
-                </div>
-            </div>
-        </section>
+  <section id="motivation">
+    <h2>研究動機與問題點</h2>
+    <p>隨著高齡化社會來臨，跌倒事件已成為老年人傷亡的主要原因之一。傳統的偵測系統多依賴單一模態（如攝影機或麥克風），但：</p>
+    <ul>
+      <li>單一模態準確率受限：視覺受光影遮蔽影響，音訊易受背景噪音干擾，單獨判斷常出現誤報或漏報。</li>
+      <li>高資源門檻：大多數深度學習系統仰賴高效能電腦與雲端服務，無法適用於資源受限環境。</li>
+      <li>隱私與延遲問題：影像上傳雲端進行判斷易引發隱私疑慮，且無法提供即時回應。</li>
+    </ul>
+    <p>因此，我們希望設計一套能：</p>
+    <ul>
+      <li>整合多種感測資料（視覺＋音訊），提升辨識精度。</li>
+      <li>部署於低記憶體、低耗電的嵌入式平台，如 Jetson Nano 2GB。</li>
+      <li>支援即時反應與硬體互動（LED、蜂鳴器），提升警示效率與真實應用價值。</li>
+    </ul>
+  </section>
 
-        <!-- 聯絡區塊 -->
-        <section id="contact" class="contact-section">
-            <div class="section-header">
-                <h2>聯絡方式</h2>
-                <p>歡迎與我交流討論</p>
-            </div>
-            <div class="contact-grid">
-                <div class="contact-card">
-                    <i class="fas fa-envelope"></i>
-                    <h4>電子郵件</h4>
-                    <p>your.email@example.com</p>
-                </div>
-                <div class="contact-card">
-                    <i class="fab fa-github"></i>
-                    <h4>GitHub</h4>
-                    <p>github.com/yourusername</p>
-                </div>
-                <div class="contact-card">
-                    <i class="fas fa-phone"></i>
-                    <h4>電話</h4>
-                    <p>+886 912 345 678</p>
-                </div>
-            </div>
-        </section>
-    </main>
+  <section id="dst-reason">
+    <h2>為何選用 Dempster-Shafer Theory（DST）？</h2>
+    <p>傳統多模態融合（例如直接平均分數）在處理不確定性與衝突時缺乏彈性。例如：</p>
+    <ul>
+      <li>視覺模型在光源不足時可能信心值低。</li>
+      <li>音訊模型在背景噪音中可能出現誤判。</li>
+    </ul>
+    <p>這時若直接合併兩者分數，反而可能降低系統準確性。</p>
+    <p><b>DST 解決痛點的方式：</b></p>
+    <ul>
+      <li><b>處理不確定性：</b><br>DST 可針對「不確定」本身給予一個信任分配（例如 m(未知)），比傳統機率方法更有彈性。</li>
+      <li><b>融合衝突資訊：</b><br>當視覺模型與音訊模型意見不同時（如一個判斷跌倒、一個判斷正常），DST 可計算「衝突係數 K」，並重新分配信任給更可靠的模態。</li>
+      <li><b>動態權重調整：</b><br>不需手動設定視覺或音訊的比重，而是依照當下輸入資料自動決定誰更可信。</li>
+    </ul>
+  </section>
 
-    <script src="script.js"></script>
+  <section id="system-architecture">
+    <h2>系統架構</h2>
+    <img src="system.png" alt="系統架構圖" style="max-width:90%;height:auto;display:block;margin:0 auto;">
+    <p style="text-align:center;">系統架構流程圖</p>
+    <h3 style="text-align:left;">系統分為四個主要執行緒：</h3>
+    <ol style="text-align:left;">
+      <li><b>影像姿態推論執行緒（Visual Thread）</b><br>
+        擷取攝影機影像，經過 Resize 與轉換後輸入至 MoveNet ONNX 模型<br>
+        推論出 17 個人體關鍵點位置與置信度<br>
+        計算身體傾斜角度，推估是否為可疑姿勢（如躺、跌倒）
+      </li>
+      <li><b>音訊辨識執行緒（Audio Thread）</b><br>
+        使用麥克風實時錄音（3 秒）<br>
+        將音訊轉為 MFCC（Mel Frequency Cepstral Coefficients）特徵圖<br>
+        輸入至 LSTM 音訊模型（ONNX），輸出是否為跌倒聲音的分數（0~1）
+      </li>
+      <li><b>決策融合與 CNN 驗證執行緒（Fusion & CNN Thread）</b><br>
+        根據視覺與音訊推論分數，使用 DST（Dempster-Shafer Theory） 計算融合信心值<br>
+        若融合結果高於門檻，擷取當下影像，使用 CNN 多分類模型（5 類：站、坐、躺、彎、爬）進行最終確認<br>
+        結果更新至 CLI Dashboard，並決定是否觸發 GPIO 輸出
+      </li>
+      <li><b>GPIO 控制與按鍵監聽執行緒（GPIO Thread）</b><br>
+        控制 LED / 蜂鳴器 等外部硬體輸出<br>
+        偵測按鈕觸發，清除跌倒事件紀錄並重置系統狀態
+      </li>
+    </ol>
+  </section>
+
+  <section id="features">
+    <h2>System Features</h2>
+    <ul>
+      <li>🔍 Pose Estimation (MoveNet)</li>
+      <li>🎤 Audio Recognition (LSTM)</li>
+      <li>🧠 Action Classification (CNN)</li>
+      <li>📶 DST Fusion Logic</li>
+      <li>💻 CLI Dashboard</li>
+      <li>🔔 GPIO Feedback</li>
+      <li>⚙️ ONNX Edge Deployment</li>
+    </ul>
+  </section>
+
+  <section id="performance">
+    <h2>Model Performance</h2>
+    <table>
+      <thead>
+        <tr><th>Model</th><th>Accuracy</th><th>Size</th><th>Input</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>CNN (5-class)</td><td>89.2%</td><td>~3.2MB</td><td>192×192×3</td></tr>
+        <tr><td>LSTM (Audio)</td><td>97%</td><td>~1.1MB</td><td>MFCC (130×40)</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <footer id="contact">
+    <p>Developed by 周明坤 Chou, Ming-kun | NCKU Cross-College Elite Program</p>
+    <p>Email: AN4096750@gs.ncku.edu.tw</p>
+  </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>
