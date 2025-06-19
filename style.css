@@ -1,903 +1,300 @@
-/* 基礎設定 */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: 'Noto Sans TC', sans-serif;
-    line-height: 1.6;
-    color: #333;
-    overflow-x: hidden;
-}
-
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
-
-/* 導航列 */
-.navbar {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
-    z-index: 1000;
-    padding: 1rem 0;
-    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
-}
-
-.nav-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.nav-logo {
-    display: flex;
-    align-items: center;
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: #2563eb;
-}
-
-.nav-logo i {
-    margin-right: 0.5rem;
-    font-size: 1.8rem;
-}
-
-.nav-menu {
-    display: flex;
-    list-style: none;
-    gap: 2rem;
-}
-
-.nav-link {
-    text-decoration: none;
-    color: #333;
-    font-weight: 500;
-    transition: color 0.3s ease;
-    position: relative;
-}
-
-.nav-link:hover {
-    color: #2563eb;
-}
-
-.nav-link::after {
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 2px;
-    bottom: -5px;
-    left: 0;
-    background-color: #2563eb;
-    transition: width 0.3s ease;
-}
-
-.nav-link:hover::after {
-    width: 100%;
-}
-
-.hamburger {
-    display: none;
-    flex-direction: column;
-    cursor: pointer;
-}
-
-.hamburger span {
-    width: 25px;
-    height: 3px;
-    background: #333;
-    margin: 3px 0;
-    transition: 0.3s;
-}
-
-/* 主要內容 */
-.main-content {
-    margin-top: 80px;
-}
-
-/* 標題區塊 */
-.hero {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    padding: 6rem 0;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-}
-
-.hero::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" fill="white" opacity="0.1"><polygon points="1000,100 1000,0 0,100"/></svg>');
-    background-size: cover;
-}
-
-.hero-content {
-    position: relative;
-    z-index: 1;
-}
-
-.hero-title {
-    font-size: 3.5rem;
-    font-weight: 700;
-    margin-bottom: 1rem;
-    animation: fadeInUp 1s ease;
-}
-
-.hero-subtitle {
-    font-size: 1.3rem;
-    margin-bottom: 2rem;
-    opacity: 0.9;
-    animation: fadeInUp 1s ease 0.2s both;
-}
-
-.hero-badges {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    flex-wrap: wrap;
-    animation: fadeInUp 1s ease 0.4s both;
-}
-
-.badge {
-    background: rgba(255, 255, 255, 0.2);
-    padding: 0.5rem 1rem;
-    border-radius: 25px;
-    font-size: 0.9rem;
-    font-weight: 500;
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-}
-
-/* 區塊樣式 */
-.section {
-    padding: 5rem 0;
-}
-
-.bg-light {
-    background-color: #f8fafc;
-}
-
-.section-title {
-    font-size: 2.5rem;
-    font-weight: 700;
-    text-align: center;
-    margin-bottom: 3rem;
-    color: #1e293b;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
-}
-
-.section-title i {
-    color: #2563eb;
-}
-
-/* 內容網格 */
-.content-grid {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    gap: 3rem;
-    align-items: center;
-}
-
-.content-text p {
-    margin-bottom: 1.5rem;
-    font-size: 1.1rem;
-    line-height: 1.8;
-}
-
-.highlight-box {
-    background: linear-gradient(135deg, #e0f2fe 0%, #f3e5f5 100%);
-    padding: 2rem;
-    border-radius: 15px;
-    border-left: 4px solid #2563eb;
-    margin-top: 2rem;
-}
-
-.highlight-box h3 {
-    color: #2563eb;
-    margin-bottom: 1rem;
-    font-size: 1.3rem;
-}
-
-.highlight-box ul {
-    list-style: none;
-}
-
-.highlight-box li {
-    margin-bottom: 0.8rem;
-    padding-left: 1.5rem;
-    position: relative;
-}
-
-.highlight-box li::before {
-    content: '✓';
-    position: absolute;
-    left: 0;
-    color: #10b981;
-    font-weight: bold;
-}
-
-/* 系統概覽 */
-.system-overview {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-    background: white;
-    padding: 2rem;
-    border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-}
-
-.overview-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 1rem;
-    border-radius: 10px;
-    background: #f1f5f9;
-    min-width: 120px;
-}
-
-.overview-item i {
-    font-size: 2rem;
-    color: #2563eb;
-}
-
-.overview-item.result {
-    background: #fef3c7;
-}
-
-.overview-item.result i {
-    color: #f59e0b;
-}
-
-.plus, .arrow {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #64748b;
-}
-
-/* 技術卡片 */
-.tech-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-}
-
-.tech-card {
-    background: white;
-    padding: 2rem;
-    border-radius: 15px;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border-top: 4px solid #2563eb;
-}
-
-.tech-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
-}
-
-.tech-icon {
-    width: 60px;
-    height: 60px;
-    background: linear-gradient(135deg, #2563eb, #3b82f6);
-    border-radius: 15px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 1.5rem;
-}
-
-.tech-icon i {
-    font-size: 1.5rem;
-    color: white;
-}
-
-.tech-card h3 {
-    font-size: 1.3rem;
-    margin-bottom: 1rem;
-    color: #1e293b;
-}
-
-.tech-card p {
-    color: #64748b;
-    line-height: 1.6;
-    margin-bottom: 1.5rem;
-}
-
-.tech-features {
-    display: flex;
-    gap: 0.5rem;
-    flex-wrap: wrap;
-}
-
-.feature-tag {
-    background: #e0f2fe;
-    color: #0369a1;
-    padding: 0.3rem 0.8rem;
-    border-radius: 20px;
-    font-size: 0.8rem;
-    font-weight: 500;
-}
-
-/* 架構圖 */
-.architecture-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 3rem;
-    align-items: start;
-}
-
-.architecture-diagram {
-    background: white;
-    padding: 2rem;
-    border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-}
-
-.module-row {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    margin-bottom: 1rem;
-}
-
-.module {
-    background: #f8fafc;
-    padding: 1.5rem;
-    border-radius: 10px;
-    text-align: center;
-    flex: 1;
-    border: 2px solid #e2e8f0;
-    transition: all 0.3s ease;
-}
-
-.module:hover {
-    border-color: #2563eb;
-    background: #f0f9ff;
-}
-
-.input-module {
-    border-color: #10b981;
-}
-
-.process-module {
-    border-color: #f59e0b;
-}
-
-.fusion-module {
-    border-color: #8b5cf6;
-}
-
-.output-module {
-    border-color: #ef4444;
-}
-
-.module i {
-    font-size: 1.5rem;
-    margin-bottom: 0.5rem;
-    color: #2563eb;
-}
-
-.module h4 {
-    font-size: 1rem;
-    margin-bottom: 0.5rem;
-    color: #1e293b;
-}
-
-.module p {
-    font-size: 0.9rem;
-    color: #64748b;
-}
-
-.arrow-down {
-    text-align: center;
-    font-size: 1.5rem;
-    color: #64748b;
-    margin: 0.5rem 0;
-}
-
-.detail-card {
-    background: white;
-    padding: 1.5rem;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    margin-bottom: 1rem;
-    border-left: 4px solid #2563eb;
-}
-
-.detail-card h4 {
-    color: #2563eb;
-    margin-bottom: 0.8rem;
-}
-
-/* 融合策略 */
-.fusion-content {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    gap: 3rem;
-}
-
-.fusion-steps {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-}
-
-.step {
-    display: flex;
-    align-items: flex-start;
-    gap: 1rem;
-    background: white;
-    padding: 1.5rem;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-}
-
-.step-number {
-    width: 40px;
-    height: 40px;
-    background: linear-gradient(135deg, #2563eb, #3b82f6);
-    color: white;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
-    flex-shrink: 0;
-}
-
-.step-content h4 {
-    color: #1e293b;
-    margin-bottom: 0.5rem;
-}
-
-.step-content p {
-    color: #64748b;
-    line-height: 1.6;
-}
-
-.fusion-performance {
-    background: white;
-    padding: 2rem;
-    border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    text-align: center;
-}
-
-.fusion-performance h3 {
-    margin-bottom: 2rem;
-    color: #1e293b;
-}
-
-.performance-chart {
-    display: flex;
-    justify-content: center;
-    gap: 2rem;
-    margin-bottom: 1.5rem;
-}
-
-.chart-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-}
-
-.chart-bar {
-    width: 60px;
-    background: linear-gradient(to top, #2563eb, #3b82f6);
-    border-radius: 5px 5px 0 0;
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
-    padding-bottom: 0.5rem;
-    position: relative;
-    min-height: 150px;
-}
-
-.chart-value {
-    color: white;
-    font-weight: bold;
-    font-size: 0.9rem;
-}
-
-.chart-label {
-    font-size: 0.9rem;
-    color: #64748b;
-}
-
-.performance-note {
-    color: #64748b;
-    font-style: italic;
-    font-size: 0.9rem;
-}
-
-/* 平台內容 */
-.platform-content {
-    display: flex;
-    flex-direction: column;
-    gap: 3rem;
-}
-
-.jetson-card {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    gap: 2rem;
-    background: white;
-    padding: 2rem;
-    border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    align-items: center;
-}
-
-.jetson-image {
-    width: 120px;
-    height: 120px;
-    background: linear-gradient(135deg, #76b900, #8bc34a);
-    border-radius: 15px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.jetson-image i {
-    font-size: 3rem;
-    color: white;
-}
-
-.jetson-specs h3 {
-    color: #1e293b;
-    margin-bottom: 1rem;
-    font-size: 1.5rem;
-}
-
-.jetson-specs ul {
-    list-style: none;
-}
-
-.jetson-specs li {
-    margin-bottom: 0.8rem;
-    color: #64748b;
-    padding-left: 1rem;
-    position: relative;
-}
-
-.jetson-specs li::before {
-    content: '▶';
-    position: absolute;
-    left: 0;
-    color: #76b900;
-}
-
-.technique-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-}
-
-.technique-card {
-    background: white;
-    padding: 2rem;
-    border-radius: 15px;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    transition: transform 0.3s ease;
-}
-
-.technique-card:hover {
-    transform: translateY(-5px);
-}
-
-.technique-card i {
-    font-size: 2.5rem;
-    color: #2563eb;
-    margin-bottom: 1rem;
-}
-
-.technique-card h4 {
-    color: #1e293b;
-    margin-bottom: 1rem;
-    font-size: 1.2rem;
-}
-
-.technique-card p {
-    color: #64748b;
-    line-height: 1.6;
-}
-
-/* 特色網格 */
-.features-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 2rem;
-}
-
-.feature-card {
-    background: white;
-    padding: 2rem;
-    border-radius: 15px;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    position: relative;
-    overflow: hidden;
-}
-
-.feature-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 4px;
-    background: linear-gradient(90deg, #2563eb, #3b82f6);
-}
-
-.feature-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-}
-
-.feature-icon {
-    width: 80px;
-    height: 80px;
-    background: linear-gradient(135deg, #2563eb, #3b82f6);
-    border-radius: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto 1.5rem;
-}
-
-.feature-icon i {
-    font-size: 2rem;
-    color: white;
-}
-
-.feature-card h3 {
-    color: #1e293b;
-    margin-bottom: 1rem;
-    font-size: 1.3rem;
-}
-
-.feature-card p {
-    color: #64748b;
-    line-height: 1.6;
-    margin-bottom: 1.5rem;
-}
-
-.feature-highlight {
-    background: linear-gradient(135deg, #fef3c7, #fed7aa);
-    color: #92400e;
-    padding: 0.5rem 1rem;
-    border-radius: 20px;
-    font-weight: bold;
-    font-size: 0.9rem;
-    display: inline-block;
-}
-
-/* 改進區域 */
-.improvement-areas {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 2rem;
-}
-
-.improvement-card {
-    background: white;
-    padding: 2rem;
-    border-radius: 15px;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-    border-left: 4px solid #8b5cf6;
-    transition: transform 0.3s ease;
-}
-
-.improvement-card:hover {
-    transform: translateY(-5px);
-}
-
-.improvement-card i {
-    font-size: 2rem;
-    color: #8b5cf6;
-    margin-bottom: 1rem;
-}
-
-.improvement-card h3 {
-    color: #1e293b;
-    margin-bottom: 1rem;
-    font-size: 1.2rem;
-}
-
-.improvement-card p {
-    color: #64748b;
-    line-height: 1.6;
-}
-
-/* 結語 */
-.conclusion {
-    background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
-    color: white;
-    padding: 5rem 0;
-}
-
-.conclusion-content p {
-    font-size: 1.1rem;
-    line-height: 1.8;
-    margin-bottom: 1.5rem;
-    opacity: 0.9;
-}
-
-/* 頁尾 */
-.footer {
-    background: #1e293b;
-    color: white;
-    padding: 3rem 0 1rem;
-}
-
-.footer-content {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
-    margin-bottom: 2rem;
-}
-
-.footer-section h4 {
-    margin-bottom: 1rem;
-    color: #3b82f6;
-}
-
-.footer-section p {
-    color: #94a3b8;
-    margin-bottom: 0.5rem;
-}
-
-/* 動畫 */
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
+// 專題數據，根據你的記憶條目進行調整
+const projectsData = [
+    {
+        title: "角色控制系統",
+        description: "設計具有獨特移動機制的角色控制系統，並解決右鍵功能問題。專注於精確的角色移動控制和互動機制。",
+        category: "programming",
+        tags: ["角色控制", "移動機制", "互動設計"],
+        icon: "fas fa-gamepad",
+        details: "這個專題專注於開發一個具有獨特移動機制的角色控制系統。系統包含精確的移動控制、互動機制，並成功排除了右鍵功能的相關問題。"
+    },
+    {
+        title: "多模式軟體整合",
+        description: "開發具有多種模式的軟體系統，實現不同模式間的無縫切換和整合功能。",
+        category: "system",
+        tags: ["模式切換", "系統整合", "軟體架構"],
+        icon: "fas fa-cogs",
+        details: "此專題涉及開發一個多模式軟體系統，能夠在不同操作模式間進行流暢切換，並實現各模式的有效整合。"
+    },
+    {
+        title: "使用者介面精確控制",
+        description: "對使用者介面元素進行精確控制，優化角色選擇和進度條功能，確保介面元素保持一致的縮放比例。",
+        category: "ui",
+        tags: ["介面設計", "精確控制", "縮放比例"],
+        icon: "fas fa-desktop",
+        details: "專注於使用者介面的精確控制，特別是角色選擇功能和進度條的優化，確保所有介面元素保持一致的縮放比例。"
+    },
+    {
+        title: "即時監控系統",
+        description: "使用print陳述句建立即時監控系統，提供程式執行狀態的即時回饋和紀錄功能。",
+        category: "programming",
+        tags: ["即時監控", "狀態紀錄", "除錯工具"],
+        icon: "fas fa-chart-line",
+        details: "開發一個基於print陳述句的即時監控系統，能夠提供程式執行狀態的即時回饋，便於開發過程中的監控和除錯。"
     }
-    to {
-        opacity: 1;
-        transform: translateY(0);
+];
+
+// 頁面載入完成後執行
+document.addEventListener('DOMContentLoaded', function() {
+    initializeWebsite();
+});
+
+function initializeWebsite() {
+    generateProjectCards();
+    setupNavigation();
+    setupProjectFilters();
+    setupMobileMenu();
+    setupScrollEffects();
+}
+
+// 生成專題卡片
+function generateProjectCards() {
+    const projectsGrid = document.getElementById('projectsGrid');
+    
+    projectsData.forEach(project => {
+        const projectCard = document.createElement('div');
+        projectCard.className = `project-card ${project.category}`;
+        
+        projectCard.innerHTML = `
+            <div class="project-icon">
+                <i class="${project.icon}"></i>
+            </div>
+            <h3>${project.title}</h3>
+            <p>${project.description}</p>
+            <div class="project-tags">
+                ${project.tags.map(tag => `<span class="project-tag">${tag}</span>`).join('')}
+            </div>
+        `;
+        
+        projectCard.addEventListener('click', () => {
+            showProjectModal(project);
+        });
+        
+        projectsGrid.appendChild(projectCard);
+    });
+}
+
+// 設置導航功能
+function setupNavigation() {
+    const navItems = document.querySelectorAll('.nav-item');
+    
+    navItems.forEach(item => {
+        item.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // 移除所有active類別
+            navItems.forEach(nav => nav.classList.remove('active'));
+            // 添加active類別到當前項目
+            this.classList.add('active');
+            
+            const targetId = this.getAttribute('href').substring(1);
+            scrollToSection(targetId);
+        });
+    });
+}
+
+// 設置專題篩選功能
+function setupProjectFilters() {
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const projectCards = document.querySelectorAll('.project-card');
+    
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+            // 移除所有active類別
+            filterBtns.forEach(filterBtn => filterBtn.classList.remove('active'));
+            // 添加active類別到當前按鈕
+            this.classList.add('active');
+            
+            const filterValue = this.getAttribute('data-filter');
+            
+            projectCards.forEach(card => {
+                if (filterValue === 'all' || card.classList.contains(filterValue)) {
+                    card.style.display = 'block';
+                    card.style.animation = 'fadeInUp 0.5s ease';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+    });
+}
+
+// 設置手機版選單
+function setupMobileMenu() {
+    const menuToggle = document.getElementById('menuToggle');
+    const sidebar = document.querySelector('.sidebar');
+    
+    menuToggle.addEventListener('click', function() {
+        sidebar.classList.toggle('active');
+    });
+    
+    // 點擊主要內容區域時關閉選單
+    document.querySelector('.main-content').addEventListener('click', function() {
+        sidebar.classList.remove('active');
+    });
+}
+
+// 設置滾動效果
+function setupScrollEffects() {
+    window.addEventListener('scroll', function() {
+        updateActiveNavigation();
+        animateOnScroll();
+    });
+}
+
+// 更新導航狀態
+function updateActiveNavigation() {
+    const sections = document.querySelectorAll('section[id]');
+    const navItems = document.querySelectorAll('.nav-item');
+    
+    let currentSection = '';
+    
+    sections.forEach(section => {
+        const sectionTop = section.offsetTop - 100;
+        const sectionHeight = section.offsetHeight;
+        
+        if (window.pageYOffset >= sectionTop && window.pageYOffset < sectionTop + sectionHeight) {
+            currentSection = section.getAttribute('id');
+        }
+    });
+    
+    navItems.forEach(item => {
+        item.classList.remove('active');
+        if (item.getAttribute('href') === `#${currentSection}`) {
+            item.classList.add('active');
+        }
+    });
+}
+
+// 滾動動畫
+function animateOnScroll() {
+    const elements = document.querySelectorAll('.project-card, .skill-item, .timeline-item, .contact-card');
+    
+    elements.forEach(element => {
+        const elementTop = element.getBoundingClientRect().top;
+        const elementVisible = 150;
+        
+        if (elementTop < window.innerHeight - elementVisible) {
+            element.style.opacity = '1';
+            element.style.transform = 'translateY(0)';
+        }
+    });
+}
+
+// 滾動到指定區塊
+function scrollToSection(sectionId) {
+    const targetSection = document.getElementById(sectionId);
+    if (targetSection) {
+        const offsetTop = targetSection.offsetTop - 50;
+        window.scrollTo({
+            top: offsetTop,
+            behavior: 'smooth'
+        });
     }
 }
 
-/* 響應式設計 */
-@media (max-width: 768px) {
-    .hamburger {
+// 顯示專題詳細資訊模態視窗
+function showProjectModal(project) {
+    const modal = document.createElement('div');
+    modal.className = 'modal';
+    modal.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(15, 23, 42, 0.9);
         display: flex;
-    }
-    
-    .nav-menu {
-        display: none;
-    }
-    
-    .hero-title {
-        font-size: 2.5rem;
-    }
-    
-    .hero-subtitle {
-        font-size: 1.1rem;
-    }
-    
-    .section-title {
-        font-size: 2rem;
-        flex-direction: column;
-        gap: 0.5rem;
-    }
-    
-    .content-grid {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-    }
-    
-    .architecture-container {
-        grid-template-columns: 1fr;
-    }
-    
-    .fusion-content {
-        grid-template-columns: 1fr;
-    }
-    
-    .jetson-card {
-        grid-template-columns: 1fr;
-        text-align: center;
-    }
-    
-    .module-row {
-        flex-direction: column;
-    }
-    
-    .performance-chart {
-        gap: 1rem;
-    }
-    
-    .system-overview {
-        padding: 1rem;
-    }
-    
-    .overview-item {
-        min-width: 100px;
-        padding: 0.8rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .container {
-        padding: 0 15px;
-    }
-    
-    .hero {
-        padding: 4rem 0;
-    }
-    
-    .hero-title {
-        font-size: 2rem;
-    }
-    
-    .section {
-        padding: 3rem 0;
-    }
-    
-    .tech-grid,
-    .features-grid,
-    .improvement-areas,
-    .technique-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .hero-badges {
-        flex-direction: column;
+        justify-content: center;
         align-items: center;
-    }
+        z-index: 2000;
+        backdrop-filter: blur(10px);
+    `;
+    
+    const modalContent = document.createElement('div');
+    modalContent.style.cssText = `
+        background: var(--bg-card);
+        border: 1px solid var(--border-color);
+        padding: 3rem;
+        border-radius: 20px;
+        max-width: 600px;
+        max-height: 80vh;
+        overflow-y: auto;
+        position: relative;
+        box-shadow: var(--shadow);
+    `;
+    
+    modalContent.innerHTML = `
+        <button class="close-btn" style="
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            font-size: 1.5rem;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        " onmouseover="this.style.background='var(--primary-color)'; this.style.color='white';" 
+           onmouseout="this.style.background='none'; this.style.color='var(--text-secondary)';">
+            <i class="fas fa-times"></i>
+        </button>
+        <div class="project-icon" style="margin-bottom: 2rem;">
+            <i class="${project.icon}"></i>
+        </div>
+        <h2 style="color: var(--text-primary); margin-bottom: 1rem;">${project.title}</h2>
+        <p style="color: var(--text-secondary); margin-bottom: 2rem; line-height: 1.6;">${project.description}</p>
+        <div style="margin-bottom: 2rem;">
+            ${project.tags.map(tag => `<span class="project-tag">${tag}</span>`).join('')}
+        </div>
+        <div>
+            <h3 style="color: var(--text-primary); margin-bottom: 1rem;">專題詳情</h3>
+            <p style="color: var(--text-secondary); line-height: 1.6;">${project.details}</p>
+        </div>
+    `;
+    
+    modal.appendChild(modalContent);
+    document.body.appendChild(modal);
+    
+    // 關閉模態視窗
+    const closeBtn = modalContent.querySelector('.close-btn');
+    closeBtn.addEventListener('click', () => {
+        document.body.removeChild(modal);
+    });
+    
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            document.body.removeChild(modal);
+        }
+    });
 }
 
-/* 平滑滾動 */
-html {
-    scroll-behavior: smooth;
-}
-
-/* 選取文字顏色 */
-::selection {
-    background: #2563eb;
-    color: white;
-}
-
-/* 滾動條樣式 */
-::-webkit-scrollbar {
-    width: 8px;
-}
-
-::-webkit-scrollbar-track {
-    background: #f1f5f9;
-}
-
-::-webkit-scrollbar-thumb {
-    background: #2563eb;
-    border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: #1d4ed8;
-}
+// 初始化動畫樣式
+document.addEventListener('DOMContentLoaded', function() {
+    const style = document.createElement('style');
+    style.textContent = `
+        .project-card, .skill-item, .timeline-item, .contact-card {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    `;
+    document.head.appendChild(style);
+});
