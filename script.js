@@ -1,269 +1,300 @@
-// 導航列功能
+// 專題數據，根據你的記憶條目進行調整
+const projectsData = [
+    {
+        title: "角色控制系統",
+        description: "設計具有獨特移動機制的角色控制系統，並解決右鍵功能問題。專注於精確的角色移動控制和互動機制。",
+        category: "programming",
+        tags: ["角色控制", "移動機制", "互動設計"],
+        icon: "fas fa-gamepad",
+        details: "這個專題專注於開發一個具有獨特移動機制的角色控制系統。系統包含精確的移動控制、互動機制，並成功排除了右鍵功能的相關問題。"
+    },
+    {
+        title: "多模式軟體整合",
+        description: "開發具有多種模式的軟體系統，實現不同模式間的無縫切換和整合功能。",
+        category: "system",
+        tags: ["模式切換", "系統整合", "軟體架構"],
+        icon: "fas fa-cogs",
+        details: "此專題涉及開發一個多模式軟體系統，能夠在不同操作模式間進行流暢切換，並實現各模式的有效整合。"
+    },
+    {
+        title: "使用者介面精確控制",
+        description: "對使用者介面元素進行精確控制，優化角色選擇和進度條功能，確保介面元素保持一致的縮放比例。",
+        category: "ui",
+        tags: ["介面設計", "精確控制", "縮放比例"],
+        icon: "fas fa-desktop",
+        details: "專注於使用者介面的精確控制，特別是角色選擇功能和進度條的優化，確保所有介面元素保持一致的縮放比例。"
+    },
+    {
+        title: "即時監控系統",
+        description: "使用print陳述句建立即時監控系統，提供程式執行狀態的即時回饋和紀錄功能。",
+        category: "programming",
+        tags: ["即時監控", "狀態紀錄", "除錯工具"],
+        icon: "fas fa-chart-line",
+        details: "開發一個基於print陳述句的即時監控系統，能夠提供程式執行狀態的即時回饋，便於開發過程中的監控和除錯。"
+    }
+];
+
+// 頁面載入完成後執行
 document.addEventListener('DOMContentLoaded', function() {
-    const hamburger = document.querySelector('.hamburger');
-    const navMenu = document.querySelector('.nav-menu');
-    const navLinks = document.querySelectorAll('.nav-link');
-
-    // 漢堡選單切換
-    hamburger.addEventListener('click', function() {
-        hamburger.classList.toggle('active');
-        navMenu.classList.toggle('active');
-    });
-
-    // 點擊導航連結時關閉選單
-    navLinks.forEach(link => {
-        link.addEventListener('click', function() {
-            hamburger.classList.remove('active');
-            navMenu.classList.remove('active');
-        });
-    });
-
-    // 滾動時改變導航列樣式
-    window.addEventListener('scroll', function() {
-        const navbar = document.querySelector('.navbar');
-        if (window.scrollY > 100) {
-            navbar.style.background = 'rgba(255, 255, 255, 0.98)';
-            navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.15)';
-        } else {
-            navbar.style.background = 'rgba(255, 255, 255, 0.95)';
-            navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
-        }
-    });
-
-    // 平滑滾動到錨點
-    navLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-            const targetId = this.getAttribute('href');
-            const targetSection = document.querySelector(targetId);
-            
-            if (targetSection) {
-                const offsetTop = targetSection.offsetTop - 80;
-                window.scrollTo({
-                    top: offsetTop,
-                    behavior: 'smooth'
-                });
-            }
-        });
-    });
-
-    // 滾動動畫
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    };
-
-    const observer = new IntersectionObserver(function(entries) {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
-            }
-        });
-    }, observerOptions);
-
-    // 觀察所有需要動畫的元素
-    const animatedElements = document.querySelectorAll('.tech-card, .feature-card, .improvement-card, .step, .detail-card');
-    animatedElements.forEach(el => {
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(30px)';
-        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-        observer.observe(el);
-    });
-
-    // 數字計數動畫
-    function animateCounter(element, target, duration) {
-        let start = 0;
-        const increment = target / (duration / 16);
-        
-        function updateCounter() {
-            start += increment;
-            if (start < target) {
-                element.textContent = Math.floor(start) + '%';
-                requestAnimationFrame(updateCounter);
-            } else {
-                element.textContent = target + '%';
-            }
-        }
-        updateCounter();
-    }
-
-    // 當性能圖表進入視野時觸發計數動畫
-    const performanceChart = document.querySelector('.performance-chart');
-    if (performanceChart) {
-        const chartObserver = new IntersectionObserver(function(entries) {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const chartValues = entry.target.querySelectorAll('.chart-value');
-                    chartValues.forEach(value => {
-                        const targetValue = parseFloat(value.textContent);
-                        value.textContent = '0%';
-                        setTimeout(() => {
-                            animateCounter(value, targetValue, 2000);
-                        }, 500);
-                    });
-                    chartObserver.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.5 });
-        
-        chartObserver.observe(performanceChart);
-    }
-
-    // 技術卡片懸停效果
-    const techCards = document.querySelectorAll('.tech-card');
-    techCards.forEach(card => {
-        card.addEventListener('mouseenter', function() {
-            this.style.transform = 'translateY(-10px) scale(1.02)';
-        });
-        
-        card.addEventListener('mouseleave', function() {
-            this.style.transform = 'translateY(0) scale(1)';
-        });
-    });
-
-    // 系統架構模組懸停效果
-    const modules = document.querySelectorAll('.module');
-    modules.forEach(module => {
-        module.addEventListener('mouseenter', function() {
-            this.style.transform = 'scale(1.05)';
-            this.style.zIndex = '10';
-        });
-        
-        module.addEventListener('mouseleave', function() {
-            this.style.transform = 'scale(1)';
-            this.style.zIndex = '1';
-        });
-    });
-
-    // 特色卡片動畫效果
-    const featureCards = document.querySelectorAll('.feature-card');
-    featureCards.forEach((card, index) => {
-        card.style.animationDelay = `${index * 0.1}s`;
-        
-        card.addEventListener('mouseenter', function() {
-            const highlight = this.querySelector('.feature-highlight');
-            if (highlight) {
-                highlight.style.transform = 'scale(1.1)';
-                highlight.style.transition = 'transform 0.3s ease';
-            }
-        });
-        
-        card.addEventListener('mouseleave', function() {
-            const highlight = this.querySelector('.feature-highlight');
-            if (highlight) {
-                highlight.style.transform = 'scale(1)';
-            }
-        });
-    });
-
-    // 步驟動畫
-    const steps = document.querySelectorAll('.step');
-    steps.forEach((step, index) => {
-        step.style.animationDelay = `${index * 0.2}s`;
-    });
-
-    // 回到頂部按鈕
-    const scrollToTopBtn = document.createElement('button');
-    scrollToTopBtn.innerHTML = '<i class="fas fa-arrow-up"></i>';
-    scrollToTopBtn.className = 'scroll-to-top';
-    scrollToTopBtn.style.cssText = `
-        position: fixed;
-        bottom: 30px;
-        right: 30px;
-        width: 50px;
-        height: 50px;
-        background: linear-gradient(135deg, #2563eb, #3b82f6);
-        color: white;
-        border: none;
-        border-radius: 50%;
-        cursor: pointer;
-        font-size: 1.2rem;
-        box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
-        opacity: 0;
-        visibility: hidden;
-        transition: all 0.3s ease;
-        z-index: 1000;
-    `;
-    
-    document.body.appendChild(scrollToTopBtn);
-
-    // 顯示/隱藏回到頂部按鈕
-    window.addEventListener('scroll', function() {
-        if (window.scrollY > 500) {
-            scrollToTopBtn.style.opacity = '1';
-            scrollToTopBtn.style.visibility = 'visible';
-        } else {
-            scrollToTopBtn.style.opacity = '0';
-            scrollToTopBtn.style.visibility = 'hidden';
-        }
-    });
-
-    // 回到頂部功能
-    scrollToTopBtn.addEventListener('click', function() {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
-    });
-
-    // 懸停效果
-    scrollToTopBtn.addEventListener('mouseenter', function() {
-        this.style.transform = 'scale(1.1)';
-    });
-    
-    scrollToTopBtn.addEventListener('mouseleave', function() {
-        this.style.transform = 'scale(1)';
-    });
-
-    // 載入完成後的動畫
-    window.addEventListener('load', function() {
-        document.body.style.opacity = '1';
-        document.body.style.transition = 'opacity 0.5s ease';
-    });
-
-    // 預載入樣式
-    document.body.style.opacity = '0';
+    initializeWebsite();
 });
 
-// 響應式導航選單樣式
-const style = document.createElement('style');
-style.textContent = `
-    @media (max-width: 768px) {
-        .nav-menu {
-            position: fixed;
-            left: -100%;
-            top: 80px;
-            flex-direction: column;
-            background-color: rgba(255, 255, 255, 0.98);
-            width: 100%;
-            text-align: center;
-            transition: 0.3s;
-            box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
-            backdrop-filter: blur(10px);
-            padding: 2rem 0;
-        }
+function initializeWebsite() {
+    generateProjectCards();
+    setupNavigation();
+    setupProjectFilters();
+    setupMobileMenu();
+    setupScrollEffects();
+}
 
-        .nav-menu.active {
-            left: 0;
-        }
+// 生成專題卡片
+function generateProjectCards() {
+    const projectsGrid = document.getElementById('projectsGrid');
+    
+    projectsData.forEach(project => {
+        const projectCard = document.createElement('div');
+        projectCard.className = `project-card ${project.category}`;
+        
+        projectCard.innerHTML = `
+            <div class="project-icon">
+                <i class="${project.icon}"></i>
+            </div>
+            <h3>${project.title}</h3>
+            <p>${project.description}</p>
+            <div class="project-tags">
+                ${project.tags.map(tag => `<span class="project-tag">${tag}</span>`).join('')}
+            </div>
+        `;
+        
+        projectCard.addEventListener('click', () => {
+            showProjectModal(project);
+        });
+        
+        projectsGrid.appendChild(projectCard);
+    });
+}
 
-        .nav-menu li {
-            margin: 1rem 0;
-        }
+// 設置導航功能
+function setupNavigation() {
+    const navItems = document.querySelectorAll('.nav-item');
+    
+    navItems.forEach(item => {
+        item.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // 移除所有active類別
+            navItems.forEach(nav => nav.classList.remove('active'));
+            // 添加active類別到當前項目
+            this.classList.add('active');
+            
+            const targetId = this.getAttribute('href').substring(1);
+            scrollToSection(targetId);
+        });
+    });
+}
 
-        .hamburger.active span:nth-child(2) {
-            opacity: 0;
-        }
+// 設置專題篩選功能
+function setupProjectFilters() {
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const projectCards = document.querySelectorAll('.project-card');
+    
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+            // 移除所有active類別
+            filterBtns.forEach(filterBtn => filterBtn.classList.remove('active'));
+            // 添加active類別到當前按鈕
+            this.classList.add('active');
+            
+            const filterValue = this.getAttribute('data-filter');
+            
+            projectCards.forEach(card => {
+                if (filterValue === 'all' || card.classList.contains(filterValue)) {
+                    card.style.display = 'block';
+                    card.style.animation = 'fadeInUp 0.5s ease';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+    });
+}
 
-        .hamburger.active span:nth-child(1) {
-            transform: translateY(9px) rotate(45deg);
-        }
+// 設置手機版選單
+function setupMobileMenu() {
+    const menuToggle = document.getElementById('menuToggle');
+    const sidebar = document.querySelector('.sidebar');
+    
+    menuToggle.addEventListener('click', function() {
+        sidebar.classList.toggle('active');
+    });
+    
+    // 點擊主要內容區域時關閉選單
+    document.querySelector('.main-content').addEventListener('click', function() {
+        sidebar.classList.remove('active');
+    });
+}
 
-        .hamburger.active span:nth-child(3) {
-            transform: translateY(-9px) rotate(-45deg);
+// 設置滾動效果
+function setupScrollEffects() {
+    window.addEventListener('scroll', function() {
+        updateActiveNavigation();
+        animateOnScroll();
+    });
+}
+
+// 更新導航狀態
+function updateActiveNavigation() {
+    const sections = document.querySelectorAll('section[id]');
+    const navItems = document.querySelectorAll('.nav-item');
+    
+    let currentSection = '';
+    
+    sections.forEach(section => {
+        const sectionTop = section.offsetTop - 100;
+        const sectionHeight = section.offsetHeight;
+        
+        if (window.pageYOffset >= sectionTop && window.pageYOffset < sectionTop + sectionHeight) {
+            currentSection = section.getAttribute('id');
         }
+    });
+    
+    navItems.forEach(item => {
+        item.classList.remove('active');
+        if (item.getAttribute('href') === `#${currentSection}`) {
+            item.classList.add('active');
+        }
+    });
+}
+
+// 滾動動畫
+function animateOnScroll() {
+    const elements = document.querySelectorAll('.project-card, .skill-item, .timeline-item, .contact-card');
+    
+    elements.forEach(element => {
+        const elementTop = element.getBoundingClientRect().top;
+        const elementVisible = 150;
+        
+        if (elementTop < window.innerHeight - elementVisible) {
+            element.style.opacity = '1';
+            element.style.transform = 'translateY(0)';
+        }
+    });
+}
+
+// 滾動到指定區塊
+function scrollToSection(sectionId) {
+    const targetSection = document.getElementById(sectionId);
+    if (targetSection) {
+        const offsetTop = targetSection.offsetTop - 50;
+        window.scrollTo({
+            top: offsetTop,
+            behavior: 'smooth'
+        });
     }
-`;
-document.head.appendChild(style);
+}
 
+// 顯示專題詳細資訊模態視窗
+function showProjectModal(project) {
+    const modal = document.createElement('div');
+    modal.className = 'modal';
+    modal.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(15, 23, 42, 0.9);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 2000;
+        backdrop-filter: blur(10px);
+    `;
+    
+    const modalContent = document.createElement('div');
+    modalContent.style.cssText = `
+        background: var(--bg-card);
+        border: 1px solid var(--border-color);
+        padding: 3rem;
+        border-radius: 20px;
+        max-width: 600px;
+        max-height: 80vh;
+        overflow-y: auto;
+        position: relative;
+        box-shadow: var(--shadow);
+    `;
+    
+    modalContent.innerHTML = `
+        <button class="close-btn" style="
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            font-size: 1.5rem;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        " onmouseover="this.style.background='var(--primary-color)'; this.style.color='white';" 
+           onmouseout="this.style.background='none'; this.style.color='var(--text-secondary)';">
+            <i class="fas fa-times"></i>
+        </button>
+        <div class="project-icon" style="margin-bottom: 2rem;">
+            <i class="${project.icon}"></i>
+        </div>
+        <h2 style="color: var(--text-primary); margin-bottom: 1rem;">${project.title}</h2>
+        <p style="color: var(--text-secondary); margin-bottom: 2rem; line-height: 1.6;">${project.description}</p>
+        <div style="margin-bottom: 2rem;">
+            ${project.tags.map(tag => `<span class="project-tag">${tag}</span>`).join('')}
+        </div>
+        <div>
+            <h3 style="color: var(--text-primary); margin-bottom: 1rem;">專題詳情</h3>
+            <p style="color: var(--text-secondary); line-height: 1.6;">${project.details}</p>
+        </div>
+    `;
+    
+    modal.appendChild(modalContent);
+    document.body.appendChild(modal);
+    
+    // 關閉模態視窗
+    const closeBtn = modalContent.querySelector('.close-btn');
+    closeBtn.addEventListener('click', () => {
+        document.body.removeChild(modal);
+    });
+    
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            document.body.removeChild(modal);
+        }
+    });
+}
+
+// 初始化動畫樣式
+document.addEventListener('DOMContentLoaded', function() {
+    const style = document.createElement('style');
+    style.textContent = `
+        .project-card, .skill-item, .timeline-item, .contact-card {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    `;
+    document.head.appendChild(style);
+});
